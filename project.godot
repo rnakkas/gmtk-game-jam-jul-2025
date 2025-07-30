@@ -11,10 +11,24 @@ config_version=5
 [application]
 
 config/name="gmtk-game-jam-jul-2025"
-run/main_scene="uid://bqekf32yhsjr2"
+run/main_scene="uid://3t78wbw6bjd"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/snap/snap_2d_transforms_to_pixel=true
+theme/stretch/aspect="keep"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+2d/snap/snap_2d_transforms_to_pixel=true
