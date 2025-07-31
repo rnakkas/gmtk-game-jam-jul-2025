@@ -61,6 +61,7 @@ vertical_alignment = 1
 
 [node name="main_menu" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 32.0
@@ -137,6 +138,7 @@ text = "Exit to Reality
 
 [node name="how_to_play_screen" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 32.0

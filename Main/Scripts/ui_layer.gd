@@ -41,4 +41,5 @@ func _on_main_menu_quit_button_pressed() -> void:
 
 func _return_to_main_menu_from_how_to_play() -> void:
 	how_to_play_screen.visible = false
+	title.visible = true
 	main_menu.visible = true

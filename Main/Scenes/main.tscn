@@ -7,3 +7,5 @@
 script = ExtResource("1_pango")
 
 [node name="ui_layer" parent="." instance=ExtResource("1_yh5la")]
+
+[node name="game" type="Node2D" parent="."]
