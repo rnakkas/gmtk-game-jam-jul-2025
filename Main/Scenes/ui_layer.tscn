@@ -1,60 +1,55 @@
-[gd_scene format=3 uid="uid://ddrguy7u6bcjg"]
+[gd_scene load_steps=5 format=3 uid="uid://ddrguy7u6bcjg"]
+
+[ext_resource type="Script" uid="uid://ojyovbs4qei3" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
+[ext_resource type="Script" uid="uid://uenksoles7gp" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
+[ext_resource type="Script" uid="uid://vx6at1r5daio" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
+[ext_resource type="Script" uid="uid://hof3ddvfcbao" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
 
 [node name="ui_layer" type="CanvasLayer"]
+script = ExtResource("1_jmiwd")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="start_menu" type="Control" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/start_menu"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
+[node name="vbox_title" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 608.0
+offset_bottom = 448.0
 theme_override_constants/separation = 32
 
-[node name="separator" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
+[node name="separator" type="Control" parent="vbox_title"]
 layout_mode = 2
 
-[node name="separator2" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
+[node name="separator2" type="Control" parent="vbox_title"]
 layout_mode = 2
 
-[node name="title" type="Label" parent="MarginContainer/start_menu/VBoxContainer"]
+[node name="title" type="Label" parent="vbox_title"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Keeper of the Flame"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="separator3" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
+[node name="start_screen" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 608.0
+offset_bottom = 448.0
+script = ExtResource("2_blkfr")
 
-[node name="separator4" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
+[node name="vbox_press_button" type="VBoxContainer" parent="start_screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.815
+anchor_right = 1.0
+anchor_bottom = 0.83
+grow_horizontal = 2
+theme_override_constants/separation = 31
 
-[node name="separator5" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
-
-[node name="separator6" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
-
-[node name="separator7" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
-
-[node name="separator8" type="Control" parent="MarginContainer/start_menu/VBoxContainer"]
-layout_mode = 2
-
-[node name="press_button_label" type="Label" parent="MarginContainer/start_menu/VBoxContainer"]
+[node name="press_button_label" type="Label" parent="start_screen/vbox_press_button"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
@@ -62,10 +57,19 @@ text = "Press any button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="main_menu" type="Control" parent="MarginContainer"]
-layout_mode = 2
+[node name="blink_timer" type="Timer" parent="start_screen"]
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/main_menu"]
+[node name="main_menu" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 608.0
+offset_bottom = 448.0
+script = ExtResource("3_fi20u")
+
+[node name="MarginContainer" type="MarginContainer" parent="main_menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,56 +81,120 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/main_menu/MarginContainer"]
+[node name="vbox_menu_items" type="VBoxContainer" parent="main_menu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/separation = 20
+theme_override_constants/separation = 21
 
-[node name="separator" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator2" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator2" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator3" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator3" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator4" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator4" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator5" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator5" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator6" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator6" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator7" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator7" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator8" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator8" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator9" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator9" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator10" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="separator10" type="Control" parent="main_menu/MarginContainer/vbox_menu_items"]
 layout_mode = 2
 
-[node name="separator11" type="Control" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="how_to_play_button" type="Button" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="how_to_play_button" type="Button" parent="main_menu/MarginContainer/vbox_menu_items"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "How to play"
 
-[node name="play_button" type="Button" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="play_button" type="Button" parent="main_menu/MarginContainer/vbox_menu_items"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Serve the Flame"
 
-[node name="quit_button" type="Button" parent="MarginContainer/main_menu/MarginContainer/VBoxContainer"]
+[node name="quit_button" type="Button" parent="main_menu/MarginContainer/vbox_menu_items"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Exit to Reality
 "
+
+[node name="how_to_play_screen" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 608.0
+offset_bottom = 448.0
+script = ExtResource("4_li8qi")
+
+[node name="MarginContainer" type="MarginContainer" parent="how_to_play_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="vbox_how_to_play" type="VBoxContainer" parent="how_to_play_screen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="separator" type="Control" parent="how_to_play_screen/MarginContainer/vbox_how_to_play"]
+layout_mode = 2
+
+[node name="how_to_play_title" type="Label" parent="how_to_play_screen/MarginContainer/vbox_how_to_play"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "How to play:"
+horizontal_alignment = 1
+
+[node name="how_to_play_text" type="Label" parent="how_to_play_screen/MarginContainer/vbox_how_to_play"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "You are the sole keeper of the ancient flame. 
+Trapped in an eternal cycle of life and death, it is your sworn duty to
+protect the flame from all who wish it harm.
+Kill the heretics! 
+Use their bones as kindling and keep the fire from dying out!
+With enough kindling, a raging inferno will cleanse all!
+
+Death is not the end...
+Rise again from the ashes and carry out your duty!
+
+Move: A S D F
+Attack: Spacebar
+Move near kindling to pick up them up.
+Bring kindling to feed the flame."
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="how_to_play_screen/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="back_to_main_menu_button" type="Button" parent="how_to_play_screen/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
