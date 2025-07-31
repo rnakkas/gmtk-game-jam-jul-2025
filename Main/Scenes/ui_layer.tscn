@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
 [ext_resource type="Script" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
-[ext_resource type="Script" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
+[ext_resource type="Script" uid="uid://vx6at1r5daio" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
 [ext_resource type="Script" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
 
 [node name="ui_layer" type="CanvasLayer"]
@@ -61,7 +61,6 @@ vertical_alignment = 1
 
 [node name="main_menu" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 32.0
@@ -135,6 +134,47 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Exit to Reality
 "
+
+[node name="vbox_options" type="VBoxContainer" parent="main_menu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 21
+
+[node name="separator" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator2" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator3" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator4" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator5" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator6" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator7" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator8" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator9" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="separator10" type="Control" parent="main_menu/MarginContainer/vbox_options"]
+layout_mode = 2
+
+[node name="fullscreen_check" type="CheckButton" parent="main_menu/MarginContainer/vbox_options"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Fullscreen"
 
 [node name="how_to_play_screen" type="Control" parent="."]
 unique_name_in_owner = true

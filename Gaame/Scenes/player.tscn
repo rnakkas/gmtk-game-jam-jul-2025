@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://rhtexhsqgpmg"]
+[gd_scene load_steps=47 format=3 uid="uid://rhtexhsqgpmg"]
 
 [ext_resource type="Script" uid="uid://03dsdnyqo3we" path="res://Gaame/Scripts/player.gd" id="1_mlcnc"]
 [ext_resource type="Texture2D" uid="uid://byicnnn52u00d" path="res://Assets/player-spritesheet-v2.png" id="1_teism"]
+[ext_resource type="Script" uid="uid://6mjr562nqpa7" path="res://Gaame/Scripts/shooting_handler.gd" id="3_aonr0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_teism"]
 atlas = ExtResource("1_teism")
@@ -325,8 +326,11 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teism"]
 radius = 13.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlcnc"]
+
 [node name="player" type="CharacterBody2D"]
 z_index = 2
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_mlcnc")
 
@@ -337,3 +341,18 @@ autoplay = "idle"
 
 [node name="collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_teism")
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_mask = 24
+
+[node name="hurtbox_collider" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("CircleShape2D_mlcnc")
+debug_color = Color(0.946708, 0.206438, 0.275978, 0.42)
+
+[node name="shooting_handler" type="Node2D" parent="." node_paths=PackedStringArray("player_sprite")]
+script = ExtResource("3_aonr0")
+player_sprite = NodePath("../sprite")
+
+[node name="muzzle" type="Marker2D" parent="shooting_handler"]
+unique_name_in_owner = true
+position = Vector2(13, 0)

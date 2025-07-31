@@ -1,19 +1,20 @@
 extends CharacterBody2D
 class_name Player
 
-## Velocity
-@export var _max_speed: float = 300.0
-@export var acceleration: float = 900.0
-@export var deceleration: float = 1000.0
 
 ## Shooting handler
-# @onready var shooting_handler: ShootingHandler = $shooting_handler
+@onready var shooting_handler: ShootingHandler = $shooting_handler
 
 ## Sprites
 @onready var sprite: AnimatedSprite2D = $sprite
 
 ## Hurtbox
 # @onready var hurtbox: Area2D = $hurtbox
+
+## Velocity
+@export var _max_speed: float = 150.0
+@export var acceleration: float = 900.0
+@export var deceleration: float = 1000.0
 
 ## Timers
 # @export var invincibility_time: float = 2.0
@@ -62,7 +63,13 @@ func _process(_delta: float) -> void:
 	_handle_invincibility()
 	_handle_screen_wrap()
 	_flip_sprite()
-	
+
+	if velocity != Vector2.ZERO:
+		sprite.play("run")
+	elif velocity == Vector2.ZERO:
+		sprite.play("idle")
+
+
 func _handle_invincibility() -> void:
 	if can_be_invincible:
 		can_be_invincible = false
