@@ -9,7 +9,10 @@ class_name Player
 @onready var sprite: AnimatedSprite2D = $sprite
 
 ## Hurtbox
-# @onready var hurtbox: Area2D = $hurtbox
+@onready var hurtbox: Area2D = $hurtbox
+
+@onready var invincible_timer: Timer = $invincible_timer
+@onready var blink_timer: Timer = $blink_timer
 
 ## Velocity
 @export var _max_speed: float = 150.0
@@ -17,8 +20,8 @@ class_name Player
 @export var deceleration: float = 1000.0
 
 ## Timers
-# @export var invincibility_time: float = 2.0
-# @onready var invincibility_timer: Timer = $invincibility_timer
+@export var invincibility_time: float = 1.7
+@export var blink_time: float = 0.1
 
 var viewport_size: Vector2
 var is_dead: bool
@@ -30,7 +33,32 @@ var can_be_invincible: bool
 ################################################
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
-	# invincibility_timer.wait_time = invincibility_time
+
+	hurtbox.area_entered.connect(self._on_hit_by_enemy_or_attacks)
+	
+	hurtbox.set_deferred("monitoring", false)
+	hurtbox.set_deferred("monitorable", false)
+	invincible_timer.timeout.connect(self._on_invincibility_timer_tiemout)
+	invincible_timer.wait_time = invincibility_time
+	invincible_timer.one_shot = true
+	invincible_timer.start()
+
+	blink_timer.timeout.connect(self._on_blink_timer_timeout)
+	blink_timer.wait_time = blink_time
+	blink_timer.one_shot = false
+	blink_timer.start()
+
+
+func _on_invincibility_timer_tiemout() -> void:
+	# Re-enable hurtbox
+	hurtbox.set_deferred("monitoring", true)
+	hurtbox.set_deferred("monitorable", true)
+	# Stop blinking
+	blink_timer.stop()
+	self.visible = true
+
+func _on_blink_timer_timeout() -> void:
+	self.visible = !self.visible
 
 
 ################################################
@@ -60,23 +88,13 @@ func _handle_movement(delta: float) -> void:
 # NOTE: Process
 ################################################
 func _process(_delta: float) -> void:
-	_handle_invincibility()
 	_handle_screen_wrap()
 	_flip_sprite()
 
 	if velocity != Vector2.ZERO:
 		sprite.play("run")
-	elif velocity == Vector2.ZERO:
+	elif velocity == Vector2.ZERO && !is_dead:
 		sprite.play("idle")
-
-
-func _handle_invincibility() -> void:
-	if can_be_invincible:
-		can_be_invincible = false
-		# invincibility_timer.start()
-		
-		# hurtbox.set_deferred("monitoring", false)
-		# hurtbox.set_deferred("monitorable", false)
 
 func _handle_screen_wrap() -> void:
 	if self.global_position.x > viewport_size.x:
@@ -104,72 +122,23 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # ################################################
-# # NOTE: Hurtbox signal
+# # Hurtbox signal
 # # Handle getting hit by enemies or projectiles
 # ################################################
-# func _on_hurtbox_area_entered(_area: Area2D) -> void:
-# 	# To prevent moving, shooting or bombing when dead
-# 	is_dead = true
-# 	shooting_handler.is_dead = true
-# 	bomb_handler.is_dead = true
-	
-# 	velocity = Vector2.ZERO
-# 	hurtbox.set_deferred("monitoring", false)
-# 	hurtbox.set_deferred("monitorable", false)
-	
-# 	rocket.visible = false # Contains body and thruster sprites
-# 	death.play("death")
+func _on_hit_by_enemy_or_attacks(_area: Area2D) -> void:
+	is_dead = true
+	shooting_handler.is_dead = true
 
-# 	SignalsBus.spawn_powerup_event.emit(self.global_position)
-	
-# 	await death.animation_finished
-	
-# 	## wait 0.5 seconds before sending signal to player spawner
-# 	await get_tree().create_timer(0.5).timeout
-	
-# 	SignalsBus.player_death_event.emit()
-	
-# 	queue_free()
-	
+	velocity = Vector2.ZERO
+	hurtbox.set_deferred("monitoring", false)
+	hurtbox.set_deferred("monitorable", false)
 
-# ################################################
-# # NOTE: Stop invincibility signal
-# ################################################
-# func _on_invincibility_timer_timeout() -> void:
-# 	# Re-enable hurtbox
-# 	hurtbox.set_deferred("monitoring", true)
-# 	hurtbox.set_deferred("monitorable", true)
+	sprite.play("death")
+	await sprite.animation_finished
 	
-# 	# Return to default animations
-# 	rocket.visible = true # Contains body and thruster sprites
-# 	invincible.play("none")
+	# wait 0.5 seconds before sending signal to player spawner
+	await get_tree().create_timer(0.5).timeout
 
-
-# ################################################
-# #NOTE: Handle shooting signals, used for animations
-# ################################################
-# func _on_shooting_handler_now_shooting(powerup: GameManager.powerups, level: int) -> void:
-# 	if is_dead:
-# 		return
-# 	body.play("shoot")
-
-# 	match powerup:
-# 		GameManager.powerups.None:
-# 			base_muzzle_flash.play("shoot")
-# 		GameManager.powerups.Overdrive:
-# 			od_muzzle_flash.play("shoot")
-# 		GameManager.powerups.Chorus:
-# 			ch_muzzle_flash.play("shoot")
-# 			if level == 4:
-# 				ch_muzzle_flash_1.play("shoot")
-# 				ch_muzzle_flash_2.play("shoot")
-
-
-# func _on_shooting_handler_stopped_shooting() -> void:
-# 	base_muzzle_flash.play("none")
-# 	od_muzzle_flash.play("none")
-# 	ch_muzzle_flash.play("none")
-# 	ch_muzzle_flash_1.play("none")
-# 	ch_muzzle_flash_2.play("none")
-# 	body.play("idle")
-# 	body.frame = rocket.frame
+	SignalsBus.player_death_event.emit(self.global_position)
+	
+	call_deferred("queue_free")

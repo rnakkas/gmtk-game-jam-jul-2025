@@ -10,9 +10,6 @@ class_name ShootingHandler
 ## Base bullet damage
 @export var base_fireball_damage: int = 1
 
-## Bullet packed scene
-@export var fireball_PS: PackedScene = preload("res://Gaame/Scenes/player_fireball.tscn")
-
 @export var player_sprite: AnimatedSprite2D
 
 ## Signals
@@ -75,7 +72,7 @@ func _handle_shooting() -> void:
 		if !on_shooting_cooldown:
 			on_shooting_cooldown = true
 
-			var fireball: PlayerFireball = fireball_PS.instantiate()
+			var fireball: PlayerFireball = Main.player_fireball_PS.instantiate()
 			fireball.position = location_base
 			fireball.damage = base_fireball_damage
 			fireball.direction = direction

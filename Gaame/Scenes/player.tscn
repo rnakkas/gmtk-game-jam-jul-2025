@@ -356,3 +356,7 @@ player_sprite = NodePath("../sprite")
 [node name="muzzle" type="Marker2D" parent="shooting_handler"]
 unique_name_in_owner = true
 position = Vector2(13, 0)
+
+[node name="invincible_timer" type="Timer" parent="."]
+
+[node name="blink_timer" type="Timer" parent="."]

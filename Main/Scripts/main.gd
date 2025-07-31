@@ -3,8 +3,9 @@ class_name Main
 
 @onready var ui_layer: UiLayer = $ui_layer
 
-@export var game_PS: PackedScene = preload("res://Gaame/Scenes/game.tscn")
-
+var game_scene: PackedScene = preload("res://Gaame/Scenes/game.tscn")
+static var player_PS: PackedScene = preload("res://Gaame/Scenes/player.tscn")
+static var player_fireball_PS: PackedScene = preload("res://Gaame/Scenes/player_fireball.tscn")
 
 func _ready() -> void:
 	_connect_to_signals()
@@ -13,7 +14,7 @@ func _connect_to_signals() -> void:
 	ui_layer.play_game_selected.connect(self._on_play_game_selected)
 
 func _on_play_game_selected() -> void:
-	var game: Node2D = game_PS.instantiate()
+	var game: Game = game_scene.instantiate()
 	add_child(game)
 
 

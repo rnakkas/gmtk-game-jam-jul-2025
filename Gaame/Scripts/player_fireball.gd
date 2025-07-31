@@ -54,6 +54,7 @@ func _on_friendly_fire_timer_timeout() -> void:
 	
 	tween.tween_property(self, "scale", Vector2(2.0, 2.0), 1.0)
 	
+	set_deferred("collision_layer", 16)
 	set_deferred("collision_mask", 75)
 
 
