@@ -90,11 +90,13 @@ func _handle_movement(delta: float) -> void:
 func _process(_delta: float) -> void:
 	_handle_screen_wrap()
 	_flip_sprite()
+	_idle_run_animations()
 
-	if velocity != Vector2.ZERO:
-		sprite.play("run")
-	elif velocity == Vector2.ZERO && !is_dead:
-		sprite.play("idle")
+	if self.global_position.y > viewport_size.y / 2:
+		set_deferred("z_index", 3)
+	elif self.global_position.y < viewport_size.y / 2:
+		set_deferred("z_index", 2)
+
 
 func _handle_screen_wrap() -> void:
 	if self.global_position.x > viewport_size.x:
@@ -112,6 +114,13 @@ func _flip_sprite() -> void:
 		sprite.flip_h = false
 	elif velocity.x < 0:
 		sprite.flip_h = true
+
+func _idle_run_animations() -> void:
+	if velocity != Vector2.ZERO:
+		sprite.play("run")
+	elif velocity == Vector2.ZERO && !is_dead:
+		sprite.play("idle")
+
 
 ################################################
 # NOTE: Game pause handler

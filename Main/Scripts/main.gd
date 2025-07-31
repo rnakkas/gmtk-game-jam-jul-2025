@@ -2,6 +2,7 @@ extends Node2D
 class_name Main
 
 @onready var ui_layer: UiLayer = $ui_layer
+@onready var flame_sprite: AnimatedSprite2D = $flame
 
 var game_scene: PackedScene = preload("res://Gaame/Scenes/game.tscn")
 static var player_PS: PackedScene = preload("res://Gaame/Scenes/player.tscn")
@@ -16,6 +17,7 @@ func _connect_to_signals() -> void:
 func _on_play_game_selected() -> void:
 	var game: Game = game_scene.instantiate()
 	add_child(game)
+	flame_sprite.visible = false
 
 
 func _input(_event: InputEvent) -> void:

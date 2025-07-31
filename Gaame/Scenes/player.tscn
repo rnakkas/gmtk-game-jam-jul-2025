@@ -324,14 +324,13 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teism"]
-radius = 13.0
+height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mlcnc"]
 
 [node name="player" type="CharacterBody2D"]
 z_index = 2
-collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("1_mlcnc")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]

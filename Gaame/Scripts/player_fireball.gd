@@ -32,6 +32,7 @@ func _ready() -> void:
 	friendly_fire_timer.start()
 
 	area_entered.connect(self._on_area_hit)
+	body_entered.connect(self._on_body_hit)
 
 func _on_lifetime_timer_timeout() -> void:
 	sprite.play("hit")
@@ -44,6 +45,14 @@ func _on_area_hit(_area: Area2D) -> void:
 	await sprite.animation_finished
 	call_deferred("queue_free")
 
+# When it hits flame
+func _on_body_hit(body: Node2D) -> void:
+	if body is StaticBody2D:
+		velocity = Vector2.ZERO
+		sprite.play("hit")
+		await sprite.animation_finished
+		call_deferred("queue_free")
+
 func _on_friendly_fire_timer_timeout() -> void:
 	## Tween the label when powerup collected
 	var tween = get_tree().create_tween()
@@ -55,7 +64,7 @@ func _on_friendly_fire_timer_timeout() -> void:
 	tween.tween_property(self, "scale", Vector2(2.0, 2.0), 1.0)
 	
 	set_deferred("collision_layer", 16)
-	set_deferred("collision_mask", 75)
+	set_deferred("collision_mask", 11)
 
 
 func _physics_process(delta: float) -> void:

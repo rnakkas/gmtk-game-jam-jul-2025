@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcjxiydeuib6o"]
+
+[ext_resource type="Texture2D" uid="uid://dkvn8c73mmjv8" path="res://Assets/flame-v1.png" id="1_l5n8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yjrt"]
+atlas = ExtResource("1_l5n8w")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n6eva"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yjrt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.15
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l5n8w"]
+radius = 50.0
+height = 104.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6eva"]
+radius = 18.5
+height = 38.0
+
+[node name="flame" type="Node2D"]
+z_index = 2
+
+[node name="flame" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n6eva")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="flame_area" type="Area2D" parent="."]
+collision_layer = 64
+
+[node name="flame_collider" type="CollisionShape2D" parent="flame_area"]
+position = Vector2(0, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_l5n8w")
+
+[node name="flame_wall" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 21
+
+[node name="wall_collider" type="CollisionShape2D" parent="flame_wall"]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n6eva")
+debug_color = Color(0.572549, 0.552941, 0.054902, 1)
