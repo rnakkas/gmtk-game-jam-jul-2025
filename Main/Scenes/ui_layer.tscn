@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddrguy7u6bcjg"]
 
-[ext_resource type="Script" uid="uid://ojyovbs4qei3" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
-[ext_resource type="Script" uid="uid://uenksoles7gp" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
-[ext_resource type="Script" uid="uid://vx6at1r5daio" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
-[ext_resource type="Script" uid="uid://hof3ddvfcbao" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
+[ext_resource type="Script" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
+[ext_resource type="Script" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
+[ext_resource type="Script" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
+[ext_resource type="Script" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
 
 [node name="ui_layer" type="CanvasLayer"]
 script = ExtResource("1_jmiwd")
