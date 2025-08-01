@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dcjxiydeuib6o"]
+[gd_scene load_steps=21 format=3 uid="uid://dcjxiydeuib6o"]
 
 [ext_resource type="Texture2D" uid="uid://biv7yee8bvjsp" path="res://Assets/flame_idle_feed-v1.png" id="1_l5n8w"]
 [ext_resource type="Script" uid="uid://c4ghd0xf3viuf" path="res://Gaame/Scripts/flame.gd" id="1_n6eva"]
@@ -122,6 +122,10 @@ height = 150.0
 radius = 36.0
 height = 76.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xn0g5"]
+radius = 51.0
+height = 102.0
+
 [node name="flame" type="Node2D"]
 z_index = 2
 script = ExtResource("1_n6eva")
@@ -153,3 +157,12 @@ shape = SubResource("CapsuleShape2D_n6eva")
 debug_color = Color(0.572549, 0.552941, 0.054902, 1)
 
 [node name="hp_drain_timer" type="Timer" parent="."]
+
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 264
+
+[node name="collider" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, 34)
+shape = SubResource("CapsuleShape2D_xn0g5")
+debug_color = Color(0.960854, 0.147902, 0.341795, 0.42)

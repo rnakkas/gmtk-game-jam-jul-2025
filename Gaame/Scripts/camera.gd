@@ -33,12 +33,16 @@ func _ready() -> void:
 
 	SignalsBus.player_hit_event.connect(self._on_player_hit_event)
 	SignalsBus.flame_feed_event.connect(self._on_flame_feed_event)
+	SignalsBus.flame_hit_event.connect(self._on_flame_hit_event)
 
 func _on_player_hit_event() -> void:
 	start_shake(30.0, 0.6, 30.0)
 
 func _on_flame_feed_event() -> void:
 	start_shake(12.0, 0.9, 10.0)
+
+func _on_flame_hit_event() -> void:
+	start_shake()
 
 
 func start_shake(magnitude: float = default_magnitude, duration: float = default_duration, frequency: float = default_frequency) -> void:

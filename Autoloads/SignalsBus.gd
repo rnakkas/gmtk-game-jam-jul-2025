@@ -29,3 +29,12 @@ signal kindling_count_updated_event(count: int)
 
 @warning_ignore("unused_signal")
 signal flame_feed_event()
+
+@warning_ignore("unused_signal")
+signal enemy_shooting_event(fireball: EnemyFireballOne)
+
+@warning_ignore("unused_signal")
+signal enemy_died_event()
+
+@warning_ignore("unused_signal")
+signal flame_hit_event()

@@ -19,6 +19,8 @@ func _connect_to_signals() -> void:
 	SignalsBus.player_shooting_event.connect(self._on_player_shooting_event)
 	SignalsBus.player_death_event.connect(self._on_player_death_evnet)
 	SignalsBus.kindling_picked_up_event.connect(self._on_kindling_picked_up_event)
+	SignalsBus.enemy_shooting_event.connect(self._on_enemy_shooting_event)
+	SignalsBus.enemy_died_event.connect(self._on_enemy_died_event)
 
 func _on_player_shooting_event(fireball: PlayerFireball) -> void:
 	add_child(fireball)
@@ -43,3 +45,10 @@ func _on_player_death_evnet(pos: Vector2) -> void:
 func _on_kindling_picked_up_event() -> void:
 	kindling_count += 1
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
+
+func _on_enemy_shooting_event(fireball: EnemyFireballOne) -> void:
+	add_child(fireball)
+
+func _on_enemy_died_event() -> void:
+	kill_count += 1
+	SignalsBus.kill_count_updated_event.emit(kill_count)
