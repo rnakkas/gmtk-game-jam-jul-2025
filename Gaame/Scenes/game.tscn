@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2l6sy3gs3rjl"]
+[gd_scene load_steps=7 format=3 uid="uid://d2l6sy3gs3rjl"]
 
 [ext_resource type="PackedScene" uid="uid://rhtexhsqgpmg" path="res://Gaame/Scenes/player.tscn" id="1_2i11c"]
 [ext_resource type="Script" uid="uid://cstlhmbxwvi6x" path="res://Gaame/Scripts/game.gd" id="1_xqprk"]
 [ext_resource type="PackedScene" uid="uid://dcjxiydeuib6o" path="res://Gaame/Scenes/flame.tscn" id="3_43bsq"]
 [ext_resource type="PackedScene" uid="uid://dokwp3xh86j4" path="res://Gaame/Scenes/camera.tscn" id="4_4yjrt"]
 [ext_resource type="PackedScene" uid="uid://chheulqygrjij" path="res://Gaame/Scenes/enemy_1.tscn" id="5_mqm5b"]
+[ext_resource type="PackedScene" uid="uid://2phb771wkseg" path="res://Gaame/Scenes/enemy_2.tscn" id="6_lvtmb"]
 
 [node name="game" type="Node2D"]
 z_index = 1
 script = ExtResource("1_xqprk")
+enemies_list = Array[PackedScene]([ExtResource("5_mqm5b"), ExtResource("6_lvtmb")])
 
 [node name="player" parent="." instance=ExtResource("1_2i11c")]
 position = Vector2(319, 330)
@@ -23,5 +25,6 @@ gizmo_extents = 27.5
 
 [node name="camera" parent="." instance=ExtResource("4_4yjrt")]
 
-[node name="enemy_1" parent="." instance=ExtResource("5_mqm5b")]
-position = Vector2(97, 101)
+[node name="enemies_container" type="Node2D" parent="."]
+
+[node name="enemy_spawn_timer" type="Timer" parent="."]

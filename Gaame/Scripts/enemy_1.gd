@@ -24,9 +24,14 @@ func _ready() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	direction = self.global_position.direction_to(Vector2(viewport_size.x / 2, (viewport_size.y / 2) + 30))
 
+	hurtbox.set_deferred("monitorable", false)
+	hurtbox.set_deferred("monitoring", false)
 	sprite.play("spawn")
 	await sprite.animation_finished
 	sprite.play("idle")
+
+	hurtbox.set_deferred("monitorable", true)
+	hurtbox.set_deferred("monitoring", true)
 
 	shoot_timer.start()
 

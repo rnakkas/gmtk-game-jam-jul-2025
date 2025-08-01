@@ -241,8 +241,6 @@ shape = SubResource("CapsuleShape2D_0pfq6")
 sprite_frames = SubResource("SpriteFrames_tve2s")
 animation = &"death"
 autoplay = "spawn"
-frame = 6
-frame_progress = 1.0
 
 [node name="enemy_shooting_component" type="Node2D" parent="."]
 script = ExtResource("4_xarwp")

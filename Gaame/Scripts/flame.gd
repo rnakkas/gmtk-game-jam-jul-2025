@@ -9,7 +9,7 @@ class_name Flame
 @export var hp: int = 75
 @export var hp_drain_time: float = 1.2
 @export var hp_drain_respawn: int = 5
-@export var hp_recovery_kindling: int = 20
+@export var hp_recovery_kindling: int = 25
 @export var hp_drain_hit: int = 2
 
 var kindling_count: int
