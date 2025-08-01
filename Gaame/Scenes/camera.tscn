@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dokwp3xh86j4"]
+
+[ext_resource type="Script" uid="uid://blecmbjtvc4rr" path="res://Gaame/Scripts/camera.gd" id="1_g2nlv"]
+
+[node name="camera" type="Camera2D"]
+offset = Vector2(320, 240)
+script = ExtResource("1_g2nlv")

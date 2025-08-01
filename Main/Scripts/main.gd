@@ -19,7 +19,6 @@ func _on_play_game_selected() -> void:
 	var game: Game = game_scene.instantiate()
 	add_child(game)
 	flame_sprite.visible = false
-	SignalsBus.game_started_event.emit(game)
 
 
 func _input(_event: InputEvent) -> void:

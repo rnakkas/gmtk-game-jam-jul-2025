@@ -135,6 +135,8 @@ func _unhandled_input(event: InputEvent) -> void:
 # # Handle getting hit by enemies or projectiles
 # ################################################
 func _on_hit_by_enemy_or_attacks(_area: Area2D) -> void:
+	SignalsBus.player_hit_event.emit()
+	
 	is_dead = true
 	shooting_handler.is_dead = true
 

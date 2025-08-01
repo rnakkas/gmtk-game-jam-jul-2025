@@ -6,12 +6,13 @@ class_name Game
 
 var kindling_count: int
 var kill_count: int
-var flame_hp: int = 75
 
 
 func _ready() -> void:
+	SignalsBus.kindling_count_updated_event.emit(kindling_count)
+	SignalsBus.kill_count_updated_event.emit(kill_count)
+	
 	_connect_to_signals()
-	flame.hp = flame_hp
 
 
 func _connect_to_signals() -> void:

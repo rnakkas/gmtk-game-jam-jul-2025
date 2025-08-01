@@ -1,18 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2l6sy3gs3rjl"]
+[gd_scene load_steps=5 format=3 uid="uid://d2l6sy3gs3rjl"]
 
 [ext_resource type="PackedScene" uid="uid://rhtexhsqgpmg" path="res://Gaame/Scenes/player.tscn" id="1_2i11c"]
 [ext_resource type="Script" uid="uid://cstlhmbxwvi6x" path="res://Gaame/Scripts/game.gd" id="1_xqprk"]
 [ext_resource type="PackedScene" uid="uid://dcjxiydeuib6o" path="res://Gaame/Scenes/flame.tscn" id="3_43bsq"]
+[ext_resource type="PackedScene" uid="uid://dokwp3xh86j4" path="res://Gaame/Scenes/camera.tscn" id="4_4yjrt"]
 
 [node name="game" type="Node2D"]
 z_index = 1
 script = ExtResource("1_xqprk")
 
 [node name="player" parent="." instance=ExtResource("1_2i11c")]
-position = Vector2(288, 324)
+position = Vector2(319, 330)
 
 [node name="flame" parent="." instance=ExtResource("3_43bsq")]
 position = Vector2(320, 240)
 
 [node name="player_sp" type="Marker2D" parent="."]
-position = Vector2(286, 325)
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(319, 330)
+gizmo_extents = 27.5
+
+[node name="camera" parent="." instance=ExtResource("4_4yjrt")]

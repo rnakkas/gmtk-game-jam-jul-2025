@@ -89,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_snxoy")
 }],
-"loop": false,
+"loop": true,
 "name": &"feed",
 "speed": 15.0
 }, {
@@ -130,11 +130,11 @@ script = ExtResource("1_n6eva")
 sprite_frames = SubResource("SpriteFrames_n6eva")
 animation = &"feed"
 autoplay = "idle"
-frame = 8
-frame_progress = 1.0
+frame_progress = 0.716197
 
 [node name="flame_area" type="Area2D" parent="."]
 collision_layer = 64
+collision_mask = 128
 
 [node name="flame_collider" type="CollisionShape2D" parent="flame_area"]
 position = Vector2(0, 26)
