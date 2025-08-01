@@ -1,32 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcjxiydeuib6o"]
+[gd_scene load_steps=11 format=3 uid="uid://dcjxiydeuib6o"]
 
-[ext_resource type="Texture2D" uid="uid://dkvn8c73mmjv8" path="res://Assets/flame-v1.png" id="1_l5n8w"]
+[ext_resource type="Texture2D" uid="uid://biv7yee8bvjsp" path="res://Assets/flame_idle_feed-v1.png" id="1_l5n8w"]
+[ext_resource type="Script" uid="uid://c4ghd0xf3viuf" path="res://Gaame/Scripts/flame.gd" id="1_n6eva"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4yjrt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6eva"]
 atlas = ExtResource("1_l5n8w")
-region = Rect2(0, 0, 96, 96)
+region = Rect2(0, 0, 160, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn0g5"]
+atlas = ExtResource("1_l5n8w")
+region = Rect2(160, 0, 160, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emv1m"]
+atlas = ExtResource("1_l5n8w")
+region = Rect2(320, 0, 160, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv7j3"]
+atlas = ExtResource("1_l5n8w")
+region = Rect2(480, 0, 160, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jryq8"]
+atlas = ExtResource("1_l5n8w")
+region = Rect2(640, 0, 160, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n6eva"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4yjrt")
+"texture": SubResource("AtlasTexture_n6eva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn0g5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emv1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv7j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jryq8")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.15
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l5n8w"]
-radius = 50.0
-height = 104.0
+radius = 74.0
+height = 150.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6eva"]
-radius = 18.5
-height = 38.0
+radius = 36.0
+height = 76.0
 
 [node name="flame" type="Node2D"]
 z_index = 2
+script = ExtResource("1_n6eva")
 
 [node name="flame" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n6eva")
@@ -37,7 +67,7 @@ autoplay = "idle"
 collision_layer = 64
 
 [node name="flame_collider" type="CollisionShape2D" parent="flame_area"]
-position = Vector2(0, 5)
+position = Vector2(0, 26)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_l5n8w")
 
@@ -46,7 +76,9 @@ collision_layer = 2
 collision_mask = 21
 
 [node name="wall_collider" type="CollisionShape2D" parent="flame_wall"]
-position = Vector2(0, 8)
+position = Vector2(0, 26)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_n6eva")
 debug_color = Color(0.572549, 0.552941, 0.054902, 1)
+
+[node name="hp_drain_timer" type="Timer" parent="."]

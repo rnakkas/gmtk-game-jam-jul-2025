@@ -7,7 +7,7 @@ class_name PlayerFireball
 
 @export var damage: int = 1
 @export var speed: float = 320.0
-@export var lifetime: float = 3.0
+@export var lifetime: float = 20.0
 @export var friendly_fire_time: float = 0.5
 
 var direction: float

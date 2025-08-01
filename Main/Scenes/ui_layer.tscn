@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddrguy7u6bcjg"]
+[gd_scene load_steps=7 format=3 uid="uid://ddrguy7u6bcjg"]
 
 [ext_resource type="Script" uid="uid://ojyovbs4qei3" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
-[ext_resource type="Script" uid="uid://uenksoles7gp" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
+[ext_resource type="Script" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
 [ext_resource type="Script" uid="uid://vx6at1r5daio" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
-[ext_resource type="Script" uid="uid://hof3ddvfcbao" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
+[ext_resource type="Script" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
+[ext_resource type="Script" uid="uid://cl056ss53ctiu" path="res://Main/Scripts/hud.gd" id="5_7b1es"]
 [ext_resource type="Texture2D" uid="uid://dulvlmbao8l8g" path="res://Assets/kindling_icon.png" id="5_r87en"]
 
 [node name="ui_layer" type="CanvasLayer"]
@@ -246,12 +247,14 @@ layout_mode = 2
 text = "Back"
 
 [node name="hud" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_7b1es")
 
 [node name="MarginContainer" type="MarginContainer" parent="hud"]
 layout_mode = 1
@@ -266,7 +269,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="hud/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 32
+theme_override_constants/separation = 30
 
 [node name="vbox_kindling" type="VBoxContainer" parent="hud/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -280,6 +283,8 @@ layout_mode = 2
 texture = ExtResource("5_r87en")
 
 [node name="kindling_count" type="Label" parent="hud/MarginContainer/HBoxContainer/vbox_kindling/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 text = "2"
 
@@ -298,13 +303,11 @@ layout_mode = 2
 [node name="separator5" type="Control" parent="hud/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="separator6" type="Control" parent="hud/MarginContainer/HBoxContainer"]
+[node name="vbox_fire_hp" type="VBoxContainer" parent="hud/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="vbox_time" type="VBoxContainer" parent="hud/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="hud/MarginContainer/HBoxContainer/vbox_time"]
+[node name="flame_hp" type="Label" parent="hud/MarginContainer/HBoxContainer/vbox_fire_hp"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -333,6 +336,7 @@ text = "Heretics burnt:"
 horizontal_alignment = 2
 
 [node name="kill_count" type="Label" parent="hud/MarginContainer/HBoxContainer/vbox_kill_counter/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12

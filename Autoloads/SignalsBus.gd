@@ -11,3 +11,9 @@ signal player_death_event(pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal player_respawn_event()
+
+@warning_ignore("unused_signal")
+signal game_started_event(game_instance: Node2D)
+
+@warning_ignore("unused_signal")
+signal flame_hp_updated_event(hp: int)

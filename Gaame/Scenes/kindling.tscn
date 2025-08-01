@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgckavvlujm41"]
+
+[ext_resource type="Script" uid="uid://c2tmsquvtefai" path="res://Gaame/Scripts/kindling.gd" id="1_qvk0y"]
+[ext_resource type="Texture2D" uid="uid://dn5egxiwi2vnd" path="res://Assets/kindling-v1.png" id="2_4ouhr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xoet"]
+atlas = ExtResource("2_4ouhr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovoq3"]
+atlas = ExtResource("2_4ouhr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nbuc"]
+atlas = ExtResource("2_4ouhr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyi6l"]
+atlas = ExtResource("2_4ouhr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qvk0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xoet")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovoq3")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nbuc")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyi6l")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"despawn",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xoet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovoq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nbuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyi6l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ouhr"]
+radius = 18.0
+
+[node name="kindling" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_qvk0y")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qvk0y")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4ouhr")
+
+[node name="despawn_timer" type="Timer" parent="."]

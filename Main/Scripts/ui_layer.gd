@@ -5,6 +5,7 @@ class_name UiLayer
 @onready var start_screen: StartScreen = %start_screen
 @onready var main_menu: MainMenu = %main_menu
 @onready var how_to_play_screen: HowToPlayScreen = %how_to_play_screen
+@onready var hud: Hud = %hud
 
 signal play_game_selected()
 
@@ -13,6 +14,7 @@ func _ready() -> void:
 	start_screen.visible = true
 	main_menu.visible = false
 	how_to_play_screen.visible = false
+	hud.visible = false
 	_connect_to_signals()
 
 func _connect_to_signals() -> void:
@@ -34,10 +36,11 @@ func _on_main_menu_how_to_play_button_pressed() -> void:
 func _on_main_menu_play_button_pressed() -> void:
 	main_menu.visible = false
 	title.visible = false
+	hud.visible = true
 	play_game_selected.emit()
 
 func _on_main_menu_quit_button_pressed() -> void:
-	get_tree().quit()
+	get_tree().call_deferred("quit")
 
 func _return_to_main_menu_from_how_to_play() -> void:
 	how_to_play_screen.visible = false

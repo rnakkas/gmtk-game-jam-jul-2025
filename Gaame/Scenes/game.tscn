@@ -9,7 +9,10 @@ z_index = 1
 script = ExtResource("1_xqprk")
 
 [node name="player" parent="." instance=ExtResource("1_2i11c")]
-position = Vector2(212, 225)
+position = Vector2(288, 324)
 
 [node name="flame" parent="." instance=ExtResource("3_43bsq")]
 position = Vector2(320, 240)
+
+[node name="player_sp" type="Marker2D" parent="."]
+position = Vector2(286, 325)

@@ -7,6 +7,7 @@ class_name Main
 var game_scene: PackedScene = preload("res://Gaame/Scenes/game.tscn")
 static var player_PS: PackedScene = preload("res://Gaame/Scenes/player.tscn")
 static var player_fireball_PS: PackedScene = preload("res://Gaame/Scenes/player_fireball.tscn")
+static var kindling_PS: PackedScene = preload("res://Gaame/Scenes/kindling.tscn")
 
 func _ready() -> void:
 	_connect_to_signals()
@@ -18,6 +19,7 @@ func _on_play_game_selected() -> void:
 	var game: Game = game_scene.instantiate()
 	add_child(game)
 	flame_sprite.visible = false
+	SignalsBus.game_started_event.emit(game)
 
 
 func _input(_event: InputEvent) -> void:
