@@ -73,6 +73,7 @@ pause={
 2d_physics/layer_5="enemy_fireball"
 2d_physics/layer_6="kindling"
 2d_physics/layer_7="flame"
+2d_physics/layer_8="player_kindling_pickup_area"
 
 [rendering]
 

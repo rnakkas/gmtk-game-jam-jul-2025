@@ -17,3 +17,9 @@ signal game_started_event(game_instance: Node2D)
 
 @warning_ignore("unused_signal")
 signal flame_hp_updated_event(hp: int)
+
+@warning_ignore("unused_signal")
+signal kindling_picked_up_event()
+
+@warning_ignore("unused_signal")
+signal kindling_count_updated_event(count: int)

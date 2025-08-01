@@ -8,6 +8,7 @@ class_name Hud
 func _ready() -> void:
 	SignalsBus.game_started_event.connect(self._on_game_started_event)
 	SignalsBus.flame_hp_updated_event.connect(self._on_flame_hp_updated_event)
+	SignalsBus.kindling_count_updated_event.connect(self._on_kindling_count_updated_event_event)
 
 func _on_game_started_event(game_instance: Node2D) -> void:
 	if game_instance is Game:
@@ -18,3 +19,6 @@ func _on_game_started_event(game_instance: Node2D) -> void:
 
 func _on_flame_hp_updated_event(flame_hp: int) -> void:
 	flame_hp_label.text = str(flame_hp)
+
+func _on_kindling_count_updated_event_event(count: int) -> void:
+	kindling_count_label.text = str(count)

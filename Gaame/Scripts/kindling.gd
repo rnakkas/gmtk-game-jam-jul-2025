@@ -17,7 +17,24 @@ func _ready() -> void:
 	despawn_timer.start()
 
 func _on_player_picked_up_kindling(_area: Area2D) -> void:
-	print_debug("pickedup")
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+
+	sprite.stop()
+
+	# Tween when collected
+	var tween = get_tree().create_tween()
+	var final_position: Vector2 = Vector2(self.position.x, self.position.y - 32.0)
+
+	tween.set_parallel(true)
+
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.5)
+	tween.tween_property(self, "position", final_position, 0.4)
+
+	await tween.finished
+	SignalsBus.kindling_picked_up_event.emit()
+	call_deferred("queue_free")
+
 
 func _on_player_death_event(_pos: Vector2) -> void:
 	_despawn()
