@@ -30,6 +30,8 @@ func _connect_to_signals() -> void:
 	SignalsBus.kindling_picked_up_event.connect(self._on_kindling_picked_up_event)
 	SignalsBus.enemy_shooting_event.connect(self._on_enemy_shooting_event)
 	SignalsBus.enemy_died_event.connect(self._on_enemy_died_event)
+	SignalsBus.flame_died_event.connect(self._on_flame_died_event)
+	SignalsBus.player_delivered_kindling_event.connect(self._on_kindling_delivered)
 
 
 func _spawn_timer_stuff() -> void:
@@ -66,18 +68,13 @@ func _get_valid_spoint_point() -> Vector2:
 func _on_player_shooting_event(fireball: PlayerFireball) -> void:
 	add_child(fireball)
 
-func _on_player_death_evnet(pos: Vector2) -> void:
+func _on_player_death_evnet(_pos: Vector2) -> void:
 	# Reset kindling count
 	kindling_count = 0
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
 	
 	# Respawn player on death
-	await get_tree().create_timer(1.5).timeout
-	# spawn kindling at player death pos
-	var kindling: Kindling = Main.kindling_PS.instantiate()
-	kindling.global_position = pos
-	add_child(kindling)
-
+	await get_tree().create_timer(1.2).timeout
 	var player: Player = Main.player_PS.instantiate()
 	player.global_position = player_sp.global_position
 	add_child(player)
@@ -87,9 +84,20 @@ func _on_kindling_picked_up_event() -> void:
 	kindling_count += 1
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
 
+func _on_kindling_delivered(count: int) -> void:
+	kindling_count = 0
+	kill_count += count
+	SignalsBus.kill_count_updated_event.emit(kill_count)
+
 func _on_enemy_shooting_event(fireball: EnemyFireballOne) -> void:
 	add_child(fireball)
 
-func _on_enemy_died_event() -> void:
-	kill_count += 1
-	SignalsBus.kill_count_updated_event.emit(kill_count)
+func _on_enemy_died_event(pos: Vector2) -> void:
+	# spawn kindling at enemy death pos
+	var kindling: Kindling = Main.kindling_PS.instantiate()
+	kindling.global_position = pos
+	add_child(kindling)
+	
+
+func _on_flame_died_event() -> void:
+	SignalsBus.game_over_event.emit(kindling_count)

@@ -21,9 +21,6 @@ func _ready() -> void:
 	shoot_timer.one_shot = false
 	shoot_timer.wait_time = shoot_time
 
-	var viewport_size: Vector2 = get_viewport_rect().size
-	direction = self.global_position.direction_to(Vector2(viewport_size.x / 2, (viewport_size.y / 2) + 30))
-
 	hurtbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
 	sprite.play("spawn")
@@ -36,23 +33,29 @@ func _ready() -> void:
 	shoot_timer.start()
 
 func _on_shoot_timer_timeout() -> void:
-	var fireball: EnemyFireballOne = fireball_PS.instantiate()
-	fireball.global_position = muzzle.global_position
-	fireball.direction = direction
-	SignalsBus.enemy_shooting_event.emit(fireball)
+	var player: Player = get_tree().get_nodes_in_group("player_group")[0]
 
-	shoot_time = randf_range(min_shoot_time, max_shoot_time)
-	shoot_timer.start()
+	if player != null:
+		direction = self.global_position.direction_to(player.global_position)
+		var fireball: EnemyFireballOne = fireball_PS.instantiate()
+		fireball.global_position = muzzle.global_position
+		fireball.direction = direction
+		SignalsBus.enemy_shooting_event.emit(fireball)
 
-	sprite.play("attack")
-	await sprite.animation_finished
-	sprite.play("idle")
+		shoot_time = randf_range(min_shoot_time, max_shoot_time)
 
+		sprite.play("attack")
+		await sprite.animation_finished
+		sprite.play("idle")
+	else:
+		return
+
+	
 func _on_hit_by_player_or_attack(_area: Area2D) -> void:
 	shoot_timer.stop()
 	hurtbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
 	sprite.play("death")
 	await sprite.animation_finished
-	SignalsBus.enemy_died_event.emit()
+	SignalsBus.enemy_died_event.emit(self.global_position)
 	call_deferred("queue_free")

@@ -4,7 +4,7 @@ class_name Kindling
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var despawn_timer: Timer = $despawn_timer
 
-@export var despawn_time: float = 15.0
+@export var despawn_time: float = 5.0
 
 
 func _ready() -> void:

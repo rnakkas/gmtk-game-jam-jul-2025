@@ -7,12 +7,14 @@ class_name Flame
 @onready var hurtbox: Area2D = $hurtbox
 
 @export var hp: int = 75
-@export var hp_drain_time: float = 1.2
+@export var hp_drain_time: float = 2.0
 @export var hp_drain_respawn: int = 5
-@export var hp_recovery_kindling: int = 25
+@export var hp_recovery_kindling: int = 15
 @export var hp_drain_hit: int = 2
 
 var kindling_count: int
+var is_dead: bool
+
 
 func _ready() -> void:
 	SignalsBus.flame_hp_updated_event.emit(hp)
@@ -45,15 +47,26 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 			return
 		hp = clamp(hp + kindling_count * hp_recovery_kindling, 0, 100)
 		SignalsBus.flame_hp_updated_event.emit(hp)
+		
+		SignalsBus.player_delivered_kindling_event.emit(kindling_count)
 
 		SignalsBus.flame_feed_event.emit()
+		
+		kindling_count = 0
+		SignalsBus.kindling_count_updated_event.emit(kindling_count)
+		
 		flame.play("feed")
 		await get_tree().create_timer(1.5).timeout
 		flame.play("idle")
-		
-		SignalsBus.kindling_count_updated_event.emit(0)
 
 func _on_hit_by_enemy(_area: Area2D) -> void:
 	hp = clamp(hp - hp_drain_hit, 0, 100)
 	SignalsBus.flame_hp_updated_event.emit(hp)
 	SignalsBus.flame_hit_event.emit()
+
+
+func _process(_delta: float) -> void:
+	if hp <= 0:
+		if !is_dead:
+			is_dead = true
+			SignalsBus.flame_died_event.emit()

@@ -26,6 +26,10 @@ window/size/viewport_height=480
 window/size/mode=4
 window/stretch/mode="viewport"
 
+[global_group]
+
+player_group="group for player"
+
 [gui]
 
 theme/snap/snap_2d_transforms_to_pixel=true

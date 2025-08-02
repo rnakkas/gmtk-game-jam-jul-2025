@@ -34,7 +34,16 @@ signal flame_feed_event()
 signal enemy_shooting_event(fireball: EnemyFireballOne)
 
 @warning_ignore("unused_signal")
-signal enemy_died_event()
+signal enemy_died_event(pos: Vector2)
 
 @warning_ignore("unused_signal")
 signal flame_hit_event()
+
+@warning_ignore("unused_signal")
+signal flame_died_event()
+
+@warning_ignore("unused_signal")
+signal game_over_event(kill_count: int)
+
+@warning_ignore("unused_signal")
+signal player_delivered_kindling_event(count: int)
