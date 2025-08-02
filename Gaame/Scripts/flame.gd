@@ -14,6 +14,7 @@ class_name Flame
 
 var kindling_count: int
 var is_dead: bool
+var can_inferno: bool
 
 
 func _ready() -> void:
@@ -47,7 +48,7 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 			return
 		hp = clamp(hp + kindling_count * hp_recovery_kindling, 0, 100)
 		SignalsBus.flame_hp_updated_event.emit(hp)
-		
+
 		SignalsBus.player_delivered_kindling_event.emit(kindling_count)
 
 		SignalsBus.flame_feed_event.emit()
@@ -70,3 +71,6 @@ func _process(_delta: float) -> void:
 		if !is_dead:
 			is_dead = true
 			SignalsBus.flame_died_event.emit()
+	if hp >= 100:
+		if !can_inferno:
+			can_inferno = true

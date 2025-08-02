@@ -226,6 +226,7 @@ animations = [{
 }]
 
 [node name="enemy_1" type="Node2D"]
+z_index = 2
 script = ExtResource("1_7jgh4")
 
 [node name="hurtbox" type="Area2D" parent="."]

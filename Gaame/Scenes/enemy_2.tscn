@@ -206,6 +206,7 @@ animations = [{
 radius = 32.1403
 
 [node name="enemy_2" type="Node2D"]
+z_index = 2
 script = ExtResource("1_sfhqb")
 
 [node name="hurtbox" type="Area2D" parent="."]

@@ -1,0 +1,131 @@
+[gd_scene load_steps=19 format=3 uid="uid://bbyskd1s5bw5b"]
+
+[ext_resource type="Texture2D" uid="uid://dwbshb80qsjt1" path="res://Assets/flame_explode-v1.png" id="1_permk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psbyk"]
+atlas = ExtResource("1_permk")
+region = Rect2(0, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpxx3"]
+atlas = ExtResource("1_permk")
+region = Rect2(640, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56s8p"]
+atlas = ExtResource("1_permk")
+region = Rect2(1280, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lov2v"]
+atlas = ExtResource("1_permk")
+region = Rect2(1920, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gsxt"]
+atlas = ExtResource("1_permk")
+region = Rect2(2560, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf62l"]
+atlas = ExtResource("1_permk")
+region = Rect2(3200, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk8v5"]
+atlas = ExtResource("1_permk")
+region = Rect2(3840, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dwb3"]
+atlas = ExtResource("1_permk")
+region = Rect2(4480, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upwh6"]
+atlas = ExtResource("1_permk")
+region = Rect2(5120, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qyrr"]
+atlas = ExtResource("1_permk")
+region = Rect2(5760, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81p73"]
+atlas = ExtResource("1_permk")
+region = Rect2(6400, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72mu6"]
+atlas = ExtResource("1_permk")
+region = Rect2(7040, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6858p"]
+atlas = ExtResource("1_permk")
+region = Rect2(7680, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bartk"]
+atlas = ExtResource("1_permk")
+region = Rect2(8320, 0, 640, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xa54m"]
+atlas = ExtResource("1_permk")
+region = Rect2(8960, 0, 640, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0byd3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psbyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpxx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56s8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lov2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gsxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf62l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk8v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dwb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upwh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qyrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81p73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72mu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6858p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bartk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xa54m")
+}],
+"loop": false,
+"name": &"inferno",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_permk"]
+size = Vector2(718, 641)
+
+[node name="flame_inferno" type="Area2D"]
+collision_layer = 1024
+collision_mask = 265
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0byd3")
+animation = &"inferno"
+
+[node name="collider" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -48.5)
+shape = SubResource("RectangleShape2D_permk")
