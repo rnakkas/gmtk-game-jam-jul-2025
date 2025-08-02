@@ -5,10 +5,13 @@ class_name Game
 @onready var player_sp: Marker2D = $player_sp
 @onready var enemies_container: Node2D = $enemies_container
 @onready var spawn_timer: Timer = $enemy_spawn_timer
+@onready var spawn_stop_timer: Timer = $spawn_stop_timer
 
 @export var enemies_list: Array[PackedScene]
 @export var max_spawn_time: float = 2.8
 @export var min_spawn_time: float = 1.6
+@export var max_stop_time: float = 60.0
+@export var min_stop_time: float = 45.0
 
 var kindling_count: int
 var kill_count: int
@@ -17,11 +20,20 @@ var valid_spawn_pos: Vector2
 
 
 func _ready() -> void:
+
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
 	SignalsBus.kill_count_updated_event.emit(kill_count)
 
 	_connect_to_signals()
 	_spawn_timer_stuff()
+
+	spawn_stop_timer.timeout.connect(self._on_spawn_stop_timeout)
+	spawn_stop_timer.one_shot = true
+	spawn_stop_timer.wait_time = randf_range(min_stop_time, max_stop_time)
+	spawn_stop_timer.start()
+
+func _on_spawn_stop_timeout() -> void:
+	spawn_timer.stop()
 
 
 func _connect_to_signals() -> void:
@@ -68,13 +80,18 @@ func _get_valid_spoint_point() -> Vector2:
 func _on_player_shooting_event(fireball: PlayerFireball) -> void:
 	add_child(fireball)
 
-func _on_player_death_evnet(_pos: Vector2) -> void:
+func _on_player_death_evnet(pos: Vector2) -> void:
 	# Reset kindling count
 	kindling_count = 0
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
 	
 	# Respawn player on death
-	await get_tree().create_timer(1.2).timeout
+	await get_tree().create_timer(2.0).timeout
+	# spawn kindling at enemy death pos
+	var kindling: Kindling = Main.kindling_PS.instantiate()
+	kindling.global_position = pos
+	add_child(kindling)
+
 	var player: Player = Main.player_PS.instantiate()
 	player.global_position = player_sp.global_position
 	add_child(player)
@@ -93,10 +110,7 @@ func _on_enemy_shooting_event(fireball: EnemyFireballOne) -> void:
 	add_child(fireball)
 
 func _on_enemy_died_event(pos: Vector2) -> void:
-	# spawn kindling at enemy death pos
-	var kindling: Kindling = Main.kindling_PS.instantiate()
-	kindling.global_position = pos
-	add_child(kindling)
+	pass
 	
 
 func _on_flame_died_event() -> void:

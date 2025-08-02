@@ -1,43 +1,46 @@
-[gd_scene load_steps=21 format=3 uid="uid://dcjxiydeuib6o"]
+[gd_scene load_steps=43 format=3 uid="uid://dcjxiydeuib6o"]
 
 [ext_resource type="Texture2D" uid="uid://biv7yee8bvjsp" path="res://Assets/flame_idle_feed-v1.png" id="1_l5n8w"]
 [ext_resource type="Script" uid="uid://c4ghd0xf3viuf" path="res://Gaame/Scripts/flame.gd" id="1_n6eva"]
+[ext_resource type="Texture2D" uid="uid://cibeo1ecru2cn" path="res://Assets/flame_feed_v2.png" id="2_sv7j3"]
+[ext_resource type="Texture2D" uid="uid://coxwafp1jm3ip" path="res://Assets/flame_explode-v2.png" id="3_emv1m"]
+[ext_resource type="Texture2D" uid="uid://c0qg8mfnvkhii" path="res://Assets/altar.png" id="3_xn0g5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o64b8"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(0, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(0, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otq83"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(160, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(160, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mi8m4"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(320, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(320, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sh8cu"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(480, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(480, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rlk4a"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(640, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(640, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jar1b"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(800, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(800, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uvdvo"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(960, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(960, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwvq1"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(1120, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(1120, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snxoy"]
-atlas = ExtResource("1_l5n8w")
-region = Rect2(1280, 192, 160, 192)
+atlas = ExtResource("2_sv7j3")
+region = Rect2(1280, 0, 160, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6eva"]
 atlas = ExtResource("1_l5n8w")
@@ -58,6 +61,46 @@ region = Rect2(480, 0, 160, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jryq8"]
 atlas = ExtResource("1_l5n8w")
 region = Rect2(640, 0, 160, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vjtn"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(0, 336, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bay6g"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(640, 336, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10yfw"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(1280, 336, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iibeg"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(1920, 336, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dywgp"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(2560, 336, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo8h7"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(0, 0, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw2w6"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(640, 0, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_beevc"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(1280, 0, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aofg8"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(1920, 0, 640, 336)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuono"]
+atlas = ExtResource("3_emv1m")
+region = Rect2(2560, 0, 640, 336)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n6eva"]
 animations = [{
@@ -112,6 +155,46 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vjtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bay6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10yfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iibeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dywgp")
+}],
+"loop": true,
+"name": &"inferno",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo8h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw2w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_beevc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aofg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuono")
+}],
+"loop": false,
+"name": &"pre-inferno",
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l5n8w"]
@@ -123,23 +206,86 @@ radius = 36.0
 height = 76.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xn0g5"]
-radius = 51.0
-height = 102.0
+radius = 71.0
+height = 142.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oael1"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y841g"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2qxh"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snsc6"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kcs4"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fevk"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt0o5"]
+atlas = ExtResource("3_xn0g5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oael1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oael1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y841g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2qxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snsc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kcs4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fevk")
+}],
+"loop": false,
+"name": &"got_kindling",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt0o5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emv1m"]
+size = Vector2(38, 27)
 
 [node name="flame" type="Node2D"]
 z_index = 2
-scale = Vector2(0.8, 0.8)
 script = ExtResource("1_n6eva")
 
 [node name="flame" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n6eva")
-animation = &"feed"
+animation = &"inferno"
 autoplay = "idle"
-frame_progress = 0.716197
 
 [node name="flame_area" type="Area2D" parent="."]
 collision_layer = 64
-collision_mask = 128
+collision_mask = 0
 
 [node name="flame_collider" type="CollisionShape2D" parent="flame_area"]
 position = Vector2(0, 26)
@@ -167,3 +313,23 @@ collision_mask = 264
 position = Vector2(0, 34)
 shape = SubResource("CapsuleShape2D_xn0g5")
 debug_color = Color(0.960854, 0.147902, 0.341795, 0.42)
+
+[node name="altar_area" type="Area2D" parent="."]
+position = Vector2(0, 5)
+collision_layer = 2048
+collision_mask = 128
+
+[node name="altar_sprite" type="AnimatedSprite2D" parent="altar_area"]
+unique_name_in_owner = true
+position = Vector2(0, 85)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_oael1")
+animation = &"got_kindling"
+autoplay = "idle"
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="altar_area"]
+position = Vector2(0, 86.5)
+shape = SubResource("RectangleShape2D_emv1m")
+debug_color = Color(0.485144, 0.580216, 0.237289, 0.42)

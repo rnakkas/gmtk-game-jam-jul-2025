@@ -33,8 +33,7 @@ func _ready() -> void:
 	shoot_timer.start()
 
 func _on_shoot_timer_timeout() -> void:
-	var player: Player = get_tree().get_nodes_in_group("player_group")[0]
-
+	var player: Player = SignalsBus.player
 	if player != null:
 		direction = self.global_position.direction_to(player.global_position)
 		var fireball: EnemyFireballOne = fireball_PS.instantiate()

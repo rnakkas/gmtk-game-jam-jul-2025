@@ -28,15 +28,19 @@ class_name Player
 var viewport_size: Vector2
 var is_dead: bool
 var can_be_invincible: bool
+var has_kindling: bool
 
 
 ################################################
 # NOTE: Ready
 ################################################
 func _ready() -> void:
+	SignalsBus.player = self
 	viewport_size = get_viewport_rect().size
 
 	hurtbox.area_entered.connect(self._on_hit_by_enemy_or_attacks)
+
+	kindling_area.area_entered.connect(self._on_kindling_picked_up)
 	
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
@@ -50,6 +54,9 @@ func _ready() -> void:
 	blink_timer.one_shot = false
 	blink_timer.start()
 
+
+func _on_kindling_picked_up(_area: Area2D) -> void:
+	has_kindling = true
 
 func _on_invincibility_timer_tiemout() -> void:
 	# Re-enable hurtbox

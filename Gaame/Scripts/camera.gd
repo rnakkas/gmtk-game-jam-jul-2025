@@ -39,7 +39,7 @@ func _on_player_hit_event() -> void:
 	start_shake(30.0, 0.6, 30.0)
 
 func _on_flame_feed_event() -> void:
-	start_shake(12.0, 0.9, 10.0)
+	start_shake(6.0, 0.9, 10.0)
 
 func _on_flame_hit_event() -> void:
 	start_shake()

@@ -1,5 +1,7 @@
 extends Node
 
+var player: Player
+
 @warning_ignore("unused_signal")
 signal player_pressed_pause_game_event()
 
@@ -47,3 +49,6 @@ signal game_over_event(kill_count: int)
 
 @warning_ignore("unused_signal")
 signal player_delivered_kindling_event(count: int)
+
+@warning_ignore("unused_signal")
+signal flame_inferno_event()

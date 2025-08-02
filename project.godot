@@ -81,6 +81,7 @@ pause={
 2d_physics/layer_9="enemy_fireball_1"
 2d_physics/layer_10="flame_hurtbox"
 2d_physics/layer_11="inferno"
+2d_physics/layer_12="altar_area"
 
 [rendering]
 

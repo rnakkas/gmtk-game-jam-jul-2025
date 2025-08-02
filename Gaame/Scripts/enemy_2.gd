@@ -56,7 +56,7 @@ func _on_screen_timer_timeout() -> void:
 
 
 func _get_player_position() -> void:
-	var player: Player = get_tree().get_nodes_in_group("player_group")[0]
+	var player: Player = SignalsBus.player
 
 	if player != null:
 		direction = self.global_position.direction_to(player.global_position)
