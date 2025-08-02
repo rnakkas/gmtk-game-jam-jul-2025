@@ -4,14 +4,16 @@ class_name EnemyFireballOne
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var screen_notifier: VisibleOnScreenNotifier2D = $screen_notifier
 
-@export var speed: float = 170.0
+@export var speed: float = 120.0
 
 var direction: Vector2
 var velocity: Vector2
+var angle_deg: float
 
 func _ready() -> void:
 	screen_notifier.screen_exited.connect(self._on_screen_exited)
 	area_entered.connect(self._on_target_hit)
+	direction = direction.rotated(deg_to_rad(angle_deg))
 	velocity = speed * direction
 
 func _physics_process(delta: float) -> void:

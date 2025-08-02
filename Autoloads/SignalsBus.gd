@@ -1,6 +1,7 @@
 extends Node
 
 var player: Player
+var flame: Flame
 
 @warning_ignore("unused_signal")
 signal player_pressed_pause_game_event()
@@ -36,6 +37,9 @@ signal flame_feed_event()
 signal enemy_shooting_event(fireball: EnemyFireballOne)
 
 @warning_ignore("unused_signal")
+signal boss_shooting_event(fireball_array: Array[Area2D])
+
+@warning_ignore("unused_signal")
 signal enemy_died_event(pos: Vector2)
 
 @warning_ignore("unused_signal")
@@ -52,3 +56,6 @@ signal player_delivered_kindling_event(count: int)
 
 @warning_ignore("unused_signal")
 signal flame_inferno_event()
+
+@warning_ignore("unused_signal")
+signal flame_inferno_ended_event(boss_killed: bool)

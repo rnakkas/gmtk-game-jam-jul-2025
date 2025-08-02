@@ -8,6 +8,7 @@ var game_scene: PackedScene = preload("res://Gaame/Scenes/game.tscn")
 static var player_PS: PackedScene = preload("res://Gaame/Scenes/player.tscn")
 static var player_fireball_PS: PackedScene = preload("res://Gaame/Scenes/player_fireball.tscn")
 static var kindling_PS: PackedScene = preload("res://Gaame/Scenes/kindling.tscn")
+static var boss_PS: PackedScene = preload("res://Gaame/Scenes/boss.tscn")
 
 func _ready() -> void:
 	_connect_to_signals()

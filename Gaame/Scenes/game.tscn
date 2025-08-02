@@ -30,3 +30,9 @@ gizmo_extents = 27.5
 [node name="enemy_spawn_timer" type="Timer" parent="."]
 
 [node name="spawn_stop_timer" type="Timer" parent="."]
+
+[node name="boss_sp_1" type="Marker2D" parent="."]
+position = Vector2(143, 242)
+
+[node name="boss_sp_2" type="Marker2D" parent="."]
+position = Vector2(485, 245)

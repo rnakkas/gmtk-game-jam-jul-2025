@@ -20,7 +20,11 @@ class_name Flame
 
 
 func _ready() -> void:
+	SignalsBus.flame = self
+
 	SignalsBus.flame_hp_updated_event.emit(hp)
+
+	SignalsBus.flame_inferno_ended_event.connect(self._on_flame_inferno_ended)
 
 	# hp_drain_timer.timeout.connect(self._on_hp_drain_timer_timeout)
 	# hp_drain_timer.wait_time = hp_drain_time
@@ -54,6 +58,7 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 		flame.play("pre-inferno")
 		await flame.animation_finished
 		flame.play("inferno")
+		SignalsBus.flame_inferno_event.emit()
 		
 		# if kindling_count == 0:
 		# 	return
@@ -90,3 +95,28 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 # 		if !is_dead:
 # 			is_dead = true
 # 			SignalsBus.flame_died_event.emit()
+
+
+func _on_flame_inferno_ended(boss_killed: bool) -> void:
+	if boss_killed:
+		hp = clamp(hp - 25, 0, 100)
+		flame.play("post_inferno")
+		await flame.animation_finished
+		flame.play("idle")
+
+		if self.scale >= Vector2(1.0, 1.0):
+			self.scale = Vector2(0.75, 0.75)
+		elif self.scale >= Vector2(0.75, 0.75) and self.scale < Vector2(1.0, 1.0):
+			self.scale = Vector2(0.5, 0.5)
+		elif self.scale >= Vector2(0.5, 0.5) and self.scale < Vector2(0.75, 0.75):
+			self.scale = Vector2(0.25, 0.25)
+
+		if hp <= 0:
+			flame.play("die_out")
+			await flame.animation_finished
+			call_deferred("queue_free")
+
+	else:
+		flame.play("post_inferno")
+		await flame.animation_finished
+		flame.play("idle")

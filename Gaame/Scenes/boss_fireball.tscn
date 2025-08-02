@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://d256fx07livbx"]
+
+[ext_resource type="Script" uid="uid://cfaxrcsugf1c3" path="res://Gaame/Scripts/boss_fireball.gd" id="1_yrf7x"]
+[ext_resource type="Texture2D" uid="uid://dvamwfvp63enj" path="res://Assets/enemy-bullet.png" id="2_nog1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uar1"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xanwh"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl88o"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se0wo"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p23xd"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljwm0"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu10t"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhi6j"]
+atlas = ExtResource("2_nog1g")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljwm0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uar1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xanwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl88o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se0wo")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p23xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljwm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu10t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhi6j")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"hit",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p23xd"]
+radius = 8.0
+
+[node name="boss_fireball" type="Area2D"]
+z_index = 4
+scale = Vector2(1.2, 1.2)
+collision_layer = 256
+collision_mask = 513
+script = ExtResource("1_yrf7x")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ljwm0")
+animation = &"fly"
+autoplay = "fly"
+frame = 1
+
+[node name="collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p23xd")
+
+[node name="screen_notifier" type="VisibleOnScreenNotifier2D" parent="."]

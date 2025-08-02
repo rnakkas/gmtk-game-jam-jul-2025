@@ -6,6 +6,8 @@ class_name Game
 @onready var enemies_container: Node2D = $enemies_container
 @onready var spawn_timer: Timer = $enemy_spawn_timer
 @onready var spawn_stop_timer: Timer = $spawn_stop_timer
+@onready var boss_sp_1: Marker2D = $boss_sp_1
+@onready var boss_sp_2: Marker2D = $boss_sp_2
 
 @export var enemies_list: Array[PackedScene]
 @export var max_spawn_time: float = 2.8
@@ -15,6 +17,7 @@ class_name Game
 
 var kindling_count: int
 var kill_count: int
+var inferno: bool
 
 var valid_spawn_pos: Vector2
 
@@ -44,7 +47,9 @@ func _connect_to_signals() -> void:
 	SignalsBus.enemy_died_event.connect(self._on_enemy_died_event)
 	SignalsBus.flame_died_event.connect(self._on_flame_died_event)
 	SignalsBus.player_delivered_kindling_event.connect(self._on_kindling_delivered)
-
+	SignalsBus.flame_inferno_event.connect(self._on_flame_inferno_event)
+	SignalsBus.flame_inferno_ended_event.connect(self._on_flame_inferno_ended)
+	SignalsBus.boss_shooting_event.connect(self._on_boss_shooting)
 
 func _spawn_timer_stuff() -> void:
 	spawn_timer.timeout.connect(self._on_spawn_timer_timeout)
@@ -87,10 +92,12 @@ func _on_player_death_evnet(pos: Vector2) -> void:
 	
 	# Respawn player on death
 	await get_tree().create_timer(2.0).timeout
+
 	# spawn kindling at enemy death pos
-	var kindling: Kindling = Main.kindling_PS.instantiate()
-	kindling.global_position = pos
-	add_child(kindling)
+	if !inferno:
+		var kindling: Kindling = Main.kindling_PS.instantiate()
+		kindling.global_position = pos
+		add_child(kindling)
 
 	var player: Player = Main.player_PS.instantiate()
 	player.global_position = player_sp.global_position
@@ -109,9 +116,36 @@ func _on_kindling_delivered(count: int) -> void:
 func _on_enemy_shooting_event(fireball: EnemyFireballOne) -> void:
 	add_child(fireball)
 
-func _on_enemy_died_event(pos: Vector2) -> void:
+
+func _on_flame_inferno_event() -> void:
+	inferno = true
+	spawn_timer.stop()
+	var boss: EnemyBoss = Main.boss_PS.instantiate()
+	var sp_arr: Array[Marker2D] = [boss_sp_1, boss_sp_2]
+	boss.global_position = sp_arr.pick_random().global_position
+
+	if SignalsBus.flame.hp == 75:
+		boss.rank = 2
+	elif SignalsBus.flame.hp == 50:
+		boss.rank = 3
+	elif SignalsBus.flame.hp <= 25:
+		boss.rank = 4 
+		spawn_timer.start()
+	
+	enemies_container.add_child(boss)
+
+func _on_enemy_died_event(_pos: Vector2) -> void:
 	pass
 	
 
 func _on_flame_died_event() -> void:
 	SignalsBus.game_over_event.emit(kindling_count)
+
+func _on_flame_inferno_ended(_boss_killed: bool) -> void:
+	inferno = false
+	spawn_timer.start()
+
+
+func _on_boss_shooting(fireball_array: Array[Area2D]) -> void:
+	for fireball: Area2D in fireball_array:
+		add_child(fireball)
