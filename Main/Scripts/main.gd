@@ -10,14 +10,17 @@ static var player_fireball_PS: PackedScene = preload("res://Gaame/Scenes/player_
 static var kindling_PS: PackedScene = preload("res://Gaame/Scenes/kindling.tscn")
 static var boss_PS: PackedScene = preload("res://Gaame/Scenes/boss.tscn")
 
+var game: Game
+
 func _ready() -> void:
 	_connect_to_signals()
 
 func _connect_to_signals() -> void:
 	ui_layer.play_game_selected.connect(self._on_play_game_selected)
+	SignalsBus.returned_main_menu_from_game.connect(self._on_returned_to_menu_from_game)
 
 func _on_play_game_selected() -> void:
-	var game: Game = game_scene.instantiate()
+	game = game_scene.instantiate()
 	add_child(game)
 	flame_sprite.visible = false
 
@@ -31,3 +34,8 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_key_label_pressed(KEY_R): # reset game
 		get_tree().paused = false
 		get_tree().reload_current_scene()
+
+func _on_returned_to_menu_from_game() -> void:
+	game.call_deferred("queue_free")
+	flame_sprite.visible = true
+	

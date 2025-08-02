@@ -16,6 +16,7 @@ var direction: Vector2
 var velocity: Vector2
 
 func _ready() -> void:
+	SignalsBus.flame_died_event.connect(self._on_flame_died)
 	screen_timer.timeout.connect(self._on_screen_timer_timeout)
 	screen_timer.wait_time = screen_time
 	screen_timer.one_shot = true
@@ -86,3 +87,11 @@ func _on_fire_detected(_area: Area2D) -> void:
 
 func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
+
+
+func _on_flame_died() -> void:
+	hurtbox.set_deferred("monitorable", false)
+	hurtbox.set_deferred("monitoring", false)
+	sprite.play("death")
+	await sprite.animation_finished
+	call_deferred("queue_free")

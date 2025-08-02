@@ -11,7 +11,7 @@ class_name EnemyBoss
 @onready var boss_shooting_2: BossShooting = $boss_shooting2
 
 @export var speed: float =  70.0
-@export var max_hp: int = 10
+@export var max_hp: int = 1
 @export var rank: int = 1
 
 var hp: int

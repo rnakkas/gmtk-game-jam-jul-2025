@@ -49,7 +49,7 @@ signal flame_hit_event()
 signal flame_died_event()
 
 @warning_ignore("unused_signal")
-signal game_over_event(kill_count: int)
+signal game_over_event()
 
 @warning_ignore("unused_signal")
 signal player_delivered_kindling_event(count: int)
@@ -59,3 +59,6 @@ signal flame_inferno_event()
 
 @warning_ignore("unused_signal")
 signal flame_inferno_ended_event(boss_killed: bool)
+
+@warning_ignore("unused_signal")
+signal returned_main_menu_from_game()

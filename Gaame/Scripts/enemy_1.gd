@@ -14,6 +14,7 @@ var shoot_time: float
 var direction: Vector2
 
 func _ready() -> void:
+	SignalsBus.flame_died_event.connect(self._on_flame_died)
 	hurtbox.area_entered.connect(self._on_hit_by_player_or_attack)
 
 	shoot_time = randf_range(min_shoot_time, max_shoot_time)
@@ -57,4 +58,12 @@ func _on_hit_by_player_or_attack(_area: Area2D) -> void:
 	sprite.play("death")
 	await sprite.animation_finished
 	SignalsBus.enemy_died_event.emit(self.global_position)
+	call_deferred("queue_free")
+
+func _on_flame_died() -> void:
+	shoot_timer.stop()
+	hurtbox.set_deferred("monitorable", false)
+	hurtbox.set_deferred("monitoring", false)
+	sprite.play("death")
+	await sprite.animation_finished
 	call_deferred("queue_free")
