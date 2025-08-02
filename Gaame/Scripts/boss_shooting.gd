@@ -76,7 +76,7 @@ func _handle_non_targeted_shooting() -> void:
 		angle_step_deg = shot_spread_angle / (bullets_per_shot - 1)
 		current_bullet_angle_deg -= (angle_step_deg * ((float(bullets_per_shot) - 1) / 2))
 
-	SignalsBus.enemy_shooting_event.emit(_populate_bullets_list(current_bullet_angle_deg, angle_step_deg))
+	SignalsBus.boss_shooting_event.emit(_populate_bullets_list(current_bullet_angle_deg, angle_step_deg))
 
 
 ################################################

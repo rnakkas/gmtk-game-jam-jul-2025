@@ -1,9 +1,8 @@
-[gd_scene load_steps=71 format=3 uid="uid://bnju1hnbxire5"]
+[gd_scene load_steps=70 format=3 uid="uid://bnju1hnbxire5"]
 
 [ext_resource type="Texture2D" uid="uid://b2i47rg6lu6uf" path="res://Assets/boss.png" id="1_l88j3"]
 [ext_resource type="Script" uid="uid://gd2rua2et8p3" path="res://Gaame/Scripts/boss.gd" id="1_wivxt"]
-[ext_resource type="Script" uid="uid://6fiq7ss1k3fm" path="res://Gaame/Scripts/boss_shooting.gd" id="3_3qocx"]
-[ext_resource type="PackedScene" uid="uid://d256fx07livbx" path="res://Gaame/Scenes/boss_fireball.tscn" id="4_nq46a"]
+[ext_resource type="PackedScene" uid="uid://c1euadxyuyd1g" path="res://Gaame/Scenes/boss_shooting.tscn" id="3_3qocx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wivxt"]
 atlas = ExtResource("1_l88j3")
@@ -516,15 +515,19 @@ scale = Vector2(0.441176, 0.470588)
 [node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(0, -4.11765)
 
-[node name="boss_shooting" type="Node2D" parent="." node_paths=PackedStringArray("shoot_timer")]
+[node name="boss_shooting" parent="." node_paths=PackedStringArray("shoot_timer") instance=ExtResource("3_3qocx")]
 position = Vector2(0, -4.11765)
-script = ExtResource("3_3qocx")
 shoot_timer = NodePath("../shoot_timer")
-shoot_time = 2.0
-bullets_per_shot = 3
-bullet_speed = 110.0
-shot_spread_angle = 25.0
-bullet_scene = ExtResource("4_nq46a")
-shooting_type = 1
 
 [node name="shoot_timer" type="Timer" parent="."]
+
+[node name="boss_shooting2" parent="." node_paths=PackedStringArray("shoot_timer") instance=ExtResource("3_3qocx")]
+position = Vector2(0, -4.11765)
+scale = Vector2(1, 1)
+shoot_timer = NodePath("../shoot_timer_2")
+bullets_per_shot = 5
+bullet_speed = 120.0
+shot_spread_angle = 360.0
+shooting_type = 0
+
+[node name="shoot_timer_2" type="Timer" parent="."]

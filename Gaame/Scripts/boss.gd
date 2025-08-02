@@ -6,10 +6,12 @@ class_name EnemyBoss
 @onready var chase_timer: Timer = $chase_timer
 @onready var screen_notifier: VisibleOnScreenNotifier2D = $screen_notifier
 @onready var shoot_timer: Timer = $shoot_timer
+@onready var shoot_timer_2: Timer = $shoot_timer_2
 @onready var boss_shooting: BossShooting = $boss_shooting
+@onready var boss_shooting_2: BossShooting = $boss_shooting2
 
 @export var speed: float =  70.0
-@export var max_hp: int = 50
+@export var max_hp: int = 10
 @export var rank: int = 1
 
 var hp: int
@@ -18,6 +20,7 @@ var velocity: Vector2
 var viewport_size: Vector2
 var player: Player
 var stay_on_screen: bool
+var can_die: bool = true
 
 func _ready() -> void:
 	match rank:
@@ -31,18 +34,24 @@ func _ready() -> void:
 			boss_shooting.shoot_time = 1.75
 			boss_shooting.bullets_per_shot = 5
 			boss_shooting.shot_spread_angle = 30.0
+			boss_shooting_2.bullets_per_shot = 5
+			shoot_timer_2.start()
 		
 		3:
 			hp = max_hp + 20
 			boss_shooting.shoot_time = 1.5
 			boss_shooting.bullets_per_shot = 7
 			boss_shooting.shot_spread_angle = 35.0
+			boss_shooting_2.bullets_per_shot = 9
+			shoot_timer_2.start()
 		
 		4:
 			hp = max_hp + 30
 			boss_shooting.shoot_time = 1.3
 			boss_shooting.bullets_per_shot = 9
 			boss_shooting.shot_spread_angle = 40
+			boss_shooting_2.bullets_per_shot = 12
+			shoot_timer_2.start()
 
 
 	hp = max_hp
@@ -111,23 +120,25 @@ func _on_screen_exited() -> void:
 func _on_hit_by_attack(_area : Area2D) -> void:
 	hp = clamp(hp - 1, 0, max_hp)
 	self.modulate = Color("#e24b13")
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.05).timeout
 	self.modulate = Color("#ffffff")
 	
 	if hp <= 0:
-		shoot_timer.stop()
-		chase_timer.stop()
-		velocity = Vector2.ZERO
-		hurtbox.set_deferred("monitorable", false)
-		hurtbox.set_deferred("monitoring", false)
-		if SignalsBus.flame.hp > 25:
-			sprite.play("despawn")
-			await sprite.animation_finished
-			call_deferred("queue_free")
-		else:
-			sprite.play("death")
-			await sprite.animation_finished
-			call_deferred("queue_free")
+		if can_die:
+			can_die = false
+			shoot_timer.stop()
+			chase_timer.stop()
+			velocity = Vector2.ZERO
+			hurtbox.set_deferred("monitorable", false)
+			hurtbox.set_deferred("monitoring", false)
+			if SignalsBus.flame.hp > 25:
+				sprite.play("despawn")
+				await sprite.animation_finished
+				call_deferred("queue_free")
+			else:
+				sprite.play("death")
+				await sprite.animation_finished
+				call_deferred("queue_free")
 
-		SignalsBus.flame_inferno_ended_event.emit(true)
+			SignalsBus.flame_inferno_ended_event.emit(true)
 	 

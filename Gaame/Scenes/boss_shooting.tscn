@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1euadxyuyd1g"]
+
+[ext_resource type="Script" uid="uid://6fiq7ss1k3fm" path="res://Gaame/Scripts/boss_shooting.gd" id="1_shkrj"]
+[ext_resource type="PackedScene" uid="uid://d256fx07livbx" path="res://Gaame/Scenes/boss_fireball.tscn" id="2_ly2ey"]
+
+[node name="boss_shooting" type="Node2D" node_paths=PackedStringArray("shoot_timer")]
+script = ExtResource("1_shkrj")
+shoot_timer = NodePath("")
+shoot_time = 2.0
+bullets_per_shot = 3
+bullet_speed = 110.0
+shot_spread_angle = 25.0
+bullet_scene = ExtResource("2_ly2ey")
+shooting_type = 1
