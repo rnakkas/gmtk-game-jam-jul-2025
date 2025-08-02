@@ -70,14 +70,14 @@ func _on_player_death_evnet(pos: Vector2) -> void:
 	# Reset kindling count
 	kindling_count = 0
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
-
+	
+	# Respawn player on death
+	await get_tree().create_timer(1.5).timeout
 	# spawn kindling at player death pos
 	var kindling: Kindling = Main.kindling_PS.instantiate()
 	kindling.global_position = pos
 	add_child(kindling)
-	
-	# Respawn player on death
-	await get_tree().create_timer(0.3).timeout
+
 	var player: Player = Main.player_PS.instantiate()
 	player.global_position = player_sp.global_position
 	add_child(player)

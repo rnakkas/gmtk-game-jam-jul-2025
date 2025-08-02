@@ -116,6 +116,18 @@ animations = [{
 "texture": SubResource("AtlasTexture_26pri")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dsd5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbbqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqybw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26pri")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ljh36")
 }, {
 "duration": 1.0,
@@ -202,5 +214,7 @@ shape = SubResource("CircleShape2D_66cxb")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2egfg")
-animation = &"run"
+animation = &"death"
 autoplay = "spawn"
+frame = 10
+frame_progress = 1.0

@@ -14,6 +14,8 @@ class_name Player
 @onready var invincible_timer: Timer = $invincible_timer
 @onready var blink_timer: Timer = $blink_timer
 
+@onready var kindling_area: Area2D = $kindling_area
+
 ## Velocity
 @export var _max_speed: float = 150.0
 @export var acceleration: float = 900.0
@@ -143,13 +145,12 @@ func _on_hit_by_enemy_or_attacks(_area: Area2D) -> void:
 	velocity = Vector2.ZERO
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
+	kindling_area.set_deferred("monitorable", false)
+	kindling_area.set_deferred("monitoring", false)
+
+	SignalsBus.player_death_event.emit(self.global_position)
 
 	sprite.play("death")
 	await sprite.animation_finished
-	
-	# wait 0.5 seconds before sending signal to player spawner
-	await get_tree().create_timer(0.5).timeout
-
-	SignalsBus.player_death_event.emit(self.global_position)
 	
 	call_deferred("queue_free")

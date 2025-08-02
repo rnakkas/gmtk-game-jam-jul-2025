@@ -44,14 +44,14 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 		if kindling_count == 0:
 			return
 		hp = clamp(hp + kindling_count * hp_recovery_kindling, 0, 100)
-		
+		SignalsBus.flame_hp_updated_event.emit(hp)
+
 		SignalsBus.flame_feed_event.emit()
 		flame.play("feed")
 		await get_tree().create_timer(1.5).timeout
 		flame.play("idle")
 		
 		SignalsBus.kindling_count_updated_event.emit(0)
-		SignalsBus.flame_hp_updated_event.emit(hp)
 
 func _on_hit_by_enemy(_area: Area2D) -> void:
 	hp = clamp(hp - hp_drain_hit, 0, 100)

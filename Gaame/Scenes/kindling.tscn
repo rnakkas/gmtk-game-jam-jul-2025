@@ -80,8 +80,10 @@ script = ExtResource("1_qvk0y")
 sprite_frames = SubResource("SpriteFrames_qvk0y")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.655915
 
 [node name="collider" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_4ouhr")
 
 [node name="despawn_timer" type="Timer" parent="."]

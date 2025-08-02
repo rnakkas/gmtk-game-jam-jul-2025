@@ -75,5 +75,6 @@ autoplay = "default"
 
 [node name="flame" type="AnimatedSprite2D" parent="."]
 position = Vector2(320, 240)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_dnvt7")
 autoplay = "default"
