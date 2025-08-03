@@ -151,12 +151,16 @@ func _on_game_end_dialog_done() -> void:
 
 func _on_flame_inferno_ended(_boss_killed: bool, _boss_rank: int) -> void:
 	inferno = false
-	if SignalsBus.flame.hp > 0:
-		spawn_timer.start()
-	else:
+	if SignalsBus.flame.hp <= 0:
 		spawn_timer.stop()
 		await get_tree().create_timer(1.0).timeout
 		SignalsBus.flame_died_event.emit()
+	# if SignalsBus.flame.hp > 0:
+	# 	spawn_timer.start()
+	# else:
+	# 	spawn_timer.stop()
+	# 	await get_tree().create_timer(1.0).timeout
+	# 	SignalsBus.flame_died_event.emit()
 
 
 func _on_boss_shooting(fireball_array: Array[Area2D]) -> void:

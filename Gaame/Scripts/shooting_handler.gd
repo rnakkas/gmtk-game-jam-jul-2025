@@ -27,15 +27,19 @@ var location_base: Vector2
 var fire_rate: float
 var direction: float
 var muzzle_position: Vector2
-
+var shooting_lock: bool
 
 ################################################
 # Ready
 ################################################
 func _ready() -> void:
+	SignalsBus.movement_lock_event.connect(self._on_movement_lock_event)
 	muzzle_position = muzzle.position
 	_update_shooting_properties()
 
+
+func _on_movement_lock_event(lock: bool) -> void:
+	shooting_lock = lock
 
 ################################################
 # Update shooting properties based on powerup
@@ -58,34 +62,39 @@ func _process(_delta: float) -> void:
 # Main function for handling shooting
 ################################################
 func _handle_shooting() -> void:
-	if player_sprite.flip_h:
-		direction = -1.0
-		muzzle.position.x = - muzzle_position.x
-	else:
-		direction = 1.0
-		muzzle.position.x = muzzle_position.x
+	if !shooting_lock:
+
+		if player_sprite.flip_h:
+			direction = -1.0
+			muzzle.position.x = - muzzle_position.x
+		else:
+			direction = 1.0
+			muzzle.position.x = muzzle_position.x
+		
+		
+		# Set the muzzle locations every frame
+		location_base = muzzle.global_position
+
+		# Only allow shooting if shot limit hasn't been reached
+		if Input.is_action_pressed("shoot"):
+			if !on_shooting_cooldown:
+				on_shooting_cooldown = true
+
+				audio_shoot.play()
+
+				var fireball: PlayerFireball = Main.player_fireball_PS.instantiate()
+				fireball.position = location_base
+				fireball.damage = base_fireball_damage
+				fireball.direction = direction
+
+				# Emit the necessary signals
+				now_shooting.emit()
+				SignalsBus.player_shooting_event.emit(fireball)
+				
+				await get_tree().create_timer(shooting_cooldown_time).timeout
+				on_shooting_cooldown = false
+		else:
+			stopped_shooting.emit()
 	
-	
-	# Set the muzzle locations every frame
-	location_base = muzzle.global_position
-
-	# Only allow shooting if shot limit hasn't been reached
-	if Input.is_action_pressed("shoot"):
-		if !on_shooting_cooldown:
-			on_shooting_cooldown = true
-
-			audio_shoot.play()
-
-			var fireball: PlayerFireball = Main.player_fireball_PS.instantiate()
-			fireball.position = location_base
-			fireball.damage = base_fireball_damage
-			fireball.direction = direction
-
-			# Emit the necessary signals
-			now_shooting.emit()
-			SignalsBus.player_shooting_event.emit(fireball)
-			
-			await get_tree().create_timer(shooting_cooldown_time).timeout
-			on_shooting_cooldown = false
 	else:
-		stopped_shooting.emit()
+		return
