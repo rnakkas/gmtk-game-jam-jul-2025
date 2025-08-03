@@ -30,9 +30,6 @@ func play_fade() -> void:
 	tween.tween_interval(1.0)
 	tween.tween_property(dialog_1, "modulate", Color.TRANSPARENT, 1.5)
 	tween.tween_interval(1.0)
-	tween.tween_property(dialog_2, "modulate", Color("#ffffff"), 1.5)
-	tween.tween_interval(1.5)
-	tween.tween_property(dialog_2, "modulate", Color.TRANSPARENT, 1.2)
 
 	await tween.finished
 
