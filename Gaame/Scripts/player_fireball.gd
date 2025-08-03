@@ -17,6 +17,7 @@ var viewport_size: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalsBus.flame_died_event.connect(self._on_flame_died)
 	viewport_size = get_viewport_rect().size
 
 	velocity.x = direction * speed
@@ -75,3 +76,9 @@ func _process(_delta: float) -> void:
 		self.global_position.x = 10.0
 	elif self.global_position.x < 0.0:
 		self.global_position.x = viewport_size.x - 10.0
+
+func _on_flame_died() -> void:
+	velocity = Vector2.ZERO
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+	call_deferred("queue_free")

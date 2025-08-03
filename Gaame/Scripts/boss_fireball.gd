@@ -19,6 +19,7 @@ func _ready() -> void:
 func _connect_to_own_signals() -> void:
 	area_entered.connect(self._on_area_entered)
 	screen_notifier.screen_exited.connect(self._on_screen_notifier_screen_exited)
+	SignalsBus.flame_died_event.connect(self._on_flame_died)
 	
 
 
@@ -32,6 +33,15 @@ func _on_screen_notifier_screen_exited() -> void:
 
 
 func _on_area_entered(_area: Area2D) -> void:
+	speed = 0
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
 	sprite.play("hit")
 	await sprite.animation_finished
+	call_deferred("queue_free")
+
+func _on_flame_died() -> void:
+	speed = 0
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
 	call_deferred("queue_free")

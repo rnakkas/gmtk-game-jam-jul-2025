@@ -25,12 +25,13 @@ var can_die: bool = true
 func _ready() -> void:
 	match rank:
 		1:
+			hp = max_hp
 			boss_shooting.shoot_time = 2.0
 			boss_shooting.bullets_per_shot = 3
 			boss_shooting.shot_spread_angle = 25.0
 		
 		2:
-			hp = max_hp + 10
+			# hp = max_hp + 10
 			boss_shooting.shoot_time = 1.75
 			boss_shooting.bullets_per_shot = 5
 			boss_shooting.shot_spread_angle = 30.0
@@ -38,7 +39,7 @@ func _ready() -> void:
 			shoot_timer_2.start()
 		
 		3:
-			hp = max_hp + 20
+			# hp = max_hp + 20
 			boss_shooting.shoot_time = 1.5
 			boss_shooting.bullets_per_shot = 7
 			boss_shooting.shot_spread_angle = 35.0
@@ -46,15 +47,12 @@ func _ready() -> void:
 			shoot_timer_2.start()
 		
 		4:
-			hp = max_hp + 30
+			# hp = max_hp + 30
 			boss_shooting.shoot_time = 1.3
 			boss_shooting.bullets_per_shot = 9
 			boss_shooting.shot_spread_angle = 40
 			boss_shooting_2.bullets_per_shot = 12
 			shoot_timer_2.start()
-
-
-	hp = max_hp
 
 	SignalsBus.player_death_event.connect(self._on_player_death)
 
@@ -114,7 +112,7 @@ func _on_player_death(_pos: Vector2) -> void:
 func _on_screen_exited() -> void:
 	shoot_timer.stop()
 	await get_tree().create_timer(1.0).timeout
-	SignalsBus.flame_inferno_ended_event.emit(false)
+	SignalsBus.flame_inferno_ended_event.emit(false, rank)
 	call_deferred("queue_free")
 
 func _on_hit_by_attack(_area : Area2D) -> void:
@@ -140,5 +138,5 @@ func _on_hit_by_attack(_area : Area2D) -> void:
 				await sprite.animation_finished
 				call_deferred("queue_free")
 
-			SignalsBus.flame_inferno_ended_event.emit(true)
+			SignalsBus.flame_inferno_ended_event.emit(true, rank)
 	 

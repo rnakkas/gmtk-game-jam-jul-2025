@@ -22,13 +22,19 @@ func _on_flame_died() -> void:
 
 # Plays fade-in → hold → fade-out sequence.
 func play_fade() -> void:
+	SignalsBus.movement_lock_event.emit(true)
 	# create new tween chain
 	var tween = get_tree().create_tween()
 
-	tween.tween_property(dialog_1, "modulate", Color("#ffffff"), 2.0)
+	tween.tween_property(dialog_1, "modulate", Color("#ffffff"), 1.2)
+	tween.tween_interval(1.0)
+	tween.tween_property(dialog_1, "modulate", Color.TRANSPARENT, 1.5)
+	tween.tween_interval(1.0)
+	tween.tween_property(dialog_2, "modulate", Color("#ffffff"), 1.5)
 	tween.tween_interval(1.5)
-	tween.tween_property(dialog_1, "modulate", Color.TRANSPARENT, 2.0)
-	tween.tween_interval(1.5)
-	tween.tween_property(dialog_2, "modulate", Color("#ffffff"), 2.0)
-	tween.tween_interval(2.5)
-	tween.tween_property(dialog_2, "modulate", Color.TRANSPARENT, 2.0)
+	tween.tween_property(dialog_2, "modulate", Color.TRANSPARENT, 1.2)
+
+	await tween.finished
+
+	SignalsBus.game_end_dialog_finished.emit()
+	SignalsBus.movement_lock_event.emit(false)

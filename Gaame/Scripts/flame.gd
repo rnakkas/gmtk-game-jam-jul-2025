@@ -32,7 +32,7 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 		flame.play("inferno")
 		SignalsBus.flame_inferno_event.emit()
 
-func _on_flame_inferno_ended(boss_killed: bool) -> void:
+func _on_flame_inferno_ended(boss_killed: bool, _boss_rank: int) -> void:
 	if boss_killed:
 		hp = clamp(hp - 25, 0, 100)
 		flame.play("post_inferno")

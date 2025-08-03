@@ -29,7 +29,7 @@ var viewport_size: Vector2
 var is_dead: bool
 var can_be_invincible: bool
 var has_kindling: bool
-
+var movement_locked: bool
 
 ################################################
 # NOTE: Ready
@@ -54,6 +54,9 @@ func _ready() -> void:
 	blink_timer.one_shot = false
 	blink_timer.start()
 
+	SignalsBus.flame_inferno_ended_event.connect(self._on_flame_inferno_ended)
+	SignalsBus.movement_lock_event.connect(self._on_movement_lock_event)
+
 
 func _on_kindling_picked_up(_area: Area2D) -> void:
 	has_kindling = true
@@ -69,6 +72,23 @@ func _on_invincibility_timer_tiemout() -> void:
 func _on_blink_timer_timeout() -> void:
 	self.visible = !self.visible
 
+func _on_flame_inferno_ended(boss_killed: bool, boss_rank: int) -> void:
+	if boss_killed and boss_rank == 4:
+		hurtbox.set_deferred("monitoring", false)
+		hurtbox.set_deferred("monitorable", false)
+		invincible_timer.timeout.connect(self._on_invincibility_timer_tiemout)
+		invincible_timer.wait_time = invincibility_time
+		invincible_timer.one_shot = true
+		invincible_timer.start()
+
+		blink_timer.timeout.connect(self._on_blink_timer_timeout)
+		blink_timer.wait_time = blink_time
+		blink_timer.one_shot = false
+		blink_timer.start()
+
+
+func _on_movement_lock_event(lock: bool) -> void:
+	movement_locked = lock
 
 ################################################
 # NOTE: Physics process
@@ -80,18 +100,21 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _handle_movement(delta: float) -> void:
-	var input_dir := Vector2.ZERO
-	
-	# Get input direction
-	input_dir.x = Input.get_axis("move_left", "move_right")
-	input_dir.y = Input.get_axis("move_up", "move_down")
-	input_dir = input_dir.normalized() # Normalize for diagonal movement
-	
-	# Velocity calcs
-	if input_dir != Vector2.ZERO:
-		velocity = velocity.move_toward(input_dir * _max_speed, acceleration * delta)
+	if !movement_locked:
+		var input_dir := Vector2.ZERO
+		
+		# Get input direction
+		input_dir.x = Input.get_axis("move_left", "move_right")
+		input_dir.y = Input.get_axis("move_up", "move_down")
+		input_dir = input_dir.normalized() # Normalize for diagonal movement
+		
+		# Velocity calcs
+		if input_dir != Vector2.ZERO:
+			velocity = velocity.move_toward(input_dir * _max_speed, acceleration * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+		velocity = Vector2.ZERO
 
 ################################################
 # NOTE: Process

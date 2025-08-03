@@ -58,7 +58,13 @@ signal player_delivered_kindling_event(count: int)
 signal flame_inferno_event()
 
 @warning_ignore("unused_signal")
-signal flame_inferno_ended_event(boss_killed: bool)
+signal flame_inferno_ended_event(boss_killed: bool, boss_rank: int)
 
 @warning_ignore("unused_signal")
 signal returned_main_menu_from_game()
+
+@warning_ignore("unused_signal")
+signal game_end_dialog_finished()
+
+@warning_ignore("unused_signal")
+signal movement_lock_event(lock: bool)

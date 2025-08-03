@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name UiLayer
 
 @onready var title: VBoxContainer = %vbox_title
+@onready var title_label: Label = %title
 @onready var start_screen: StartScreen = %start_screen
 @onready var main_menu: MainMenu = %main_menu
 @onready var how_to_play_screen: HowToPlayScreen = %how_to_play_screen
@@ -29,6 +30,7 @@ func _connect_to_signals() -> void:
 	main_menu.quit_button_pressed.connect(self._on_main_menu_quit_button_pressed)
 	how_to_play_screen.back_button_pressed.connect(self._return_to_main_menu_from_how_to_play)
 	pause_menu.return_to_main_menu_from_pause.connect(self._return_to_main_menu_from_pause)
+	SignalsBus.game_over_event.connect(self._on_game_over_event)
 
 func _on_start_screen_button_pressed() -> void:
 	start_screen.visible = false
@@ -60,3 +62,19 @@ func _return_to_main_menu_from_pause() -> void:
 	main_menu.visible = true
 	title.visible = true
 	SignalsBus.returned_main_menu_from_game.emit()
+
+func _on_game_over_event() -> void:
+	hud.visible = false
+	dialog.visible = false
+	title.modulate = Color.TRANSPARENT
+	main_menu.modulate = Color.TRANSPARENT
+	title.visible = true
+	main_menu.visible = true
+
+	# create new tween chain
+	var tween = get_tree().create_tween()
+
+	tween.tween_property(title, "modulate", Color("#ffffff"), 2.0)
+	tween.tween_property(main_menu, "modulate", Color("#ffffff"), 2.0)
+
+	

@@ -18,6 +18,7 @@ func _ready() -> void:
 func _connect_to_signals() -> void:
 	ui_layer.play_game_selected.connect(self._on_play_game_selected)
 	SignalsBus.returned_main_menu_from_game.connect(self._on_returned_to_menu_from_game)
+	SignalsBus.game_over_event.connect(self._on_game_over_event)
 
 func _on_play_game_selected() -> void:
 	game = game_scene.instantiate()
@@ -39,3 +40,15 @@ func _on_returned_to_menu_from_game() -> void:
 	game.call_deferred("queue_free")
 	flame_sprite.visible = true
 	
+func _on_game_over_event() -> void:
+	game.call_deferred("queue_free")
+	flame_sprite.modulate = Color.TRANSPARENT
+	flame_sprite.visible = true
+
+	# create new tween chain
+	var tween = get_tree().create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(flame_sprite, "modulate", Color("#ffffff"), 2.0)
+
+	await tween.finished

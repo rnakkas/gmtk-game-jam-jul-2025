@@ -11,6 +11,7 @@ var velocity: Vector2
 var angle_deg: float
 
 func _ready() -> void:
+	SignalsBus.flame_died_event.connect(self._on_flame_died)
 	screen_notifier.screen_exited.connect(self._on_screen_exited)
 	area_entered.connect(self._on_target_hit)
 	direction = direction.rotated(deg_to_rad(angle_deg))
@@ -31,4 +32,10 @@ func _on_target_hit(_area: Area2D) -> void:
 	set_deferred("monitoring", false)
 	sprite.play("hit")
 	await sprite.animation_finished
+	call_deferred("queue_free")
+
+func _on_flame_died() -> void:
+	velocity = Vector2.ZERO
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
 	call_deferred("queue_free")
