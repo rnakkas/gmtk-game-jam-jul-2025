@@ -8,6 +8,7 @@ class_name Game
 @onready var spawn_stop_timer: Timer = $spawn_stop_timer
 @onready var boss_sp_1: Marker2D = $boss_sp_1
 @onready var boss_sp_2: Marker2D = $boss_sp_2
+@onready var audio_bgm: AudioStreamPlayer = $audio_bgm
 
 @export var enemies_list: Array[PackedScene]
 @export var max_spawn_time: float = 2.8
@@ -24,6 +25,7 @@ var valid_spawn_pos: Vector2
 
 
 func _ready() -> void:
+	audio_bgm.play(8.0)
 
 	SignalsBus.kindling_count_updated_event.emit(kindling_count)
 	SignalsBus.kill_count_updated_event.emit(kill_count)
@@ -123,7 +125,7 @@ func _on_enemy_shooting_event(fireball: EnemyFireballOne) -> void:
 
 func _on_flame_inferno_event() -> void:
 	inferno = true
-	spawn_timer.stop()
+	spawn_timer.start()
 	var boss: EnemyBoss = Main.boss_PS.instantiate()
 	var sp_arr: Array[Marker2D] = [boss_sp_1, boss_sp_2]
 	boss.global_position = sp_arr.pick_random().global_position

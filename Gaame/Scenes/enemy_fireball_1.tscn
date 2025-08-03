@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://lq3w1mc1ukv1"]
+[gd_scene load_steps=14 format=3 uid="uid://lq3w1mc1ukv1"]
 
 [ext_resource type="Script" uid="uid://cnqejl6xylubi" path="res://Gaame/Scripts/enemy_fireball_1.gd" id="1_7uar1"]
 [ext_resource type="Texture2D" uid="uid://dvamwfvp63enj" path="res://Assets/enemy-bullet.png" id="1_p23xd"]
+[ext_resource type="AudioStream" uid="uid://dwsltj5e76032" path="res://Assets/Audio/442872__qubodup__fire-magic.wav" id="3_xanwh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7uar1"]
 atlas = ExtResource("1_p23xd")
@@ -94,3 +95,8 @@ frame = 1
 shape = SubResource("CircleShape2D_p23xd")
 
 [node name="screen_notifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="audio_hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xanwh")
+volume_db = -22.0
+pitch_scale = 2.3

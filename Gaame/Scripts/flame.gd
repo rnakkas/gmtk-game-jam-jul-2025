@@ -7,6 +7,8 @@ class_name Flame
 @onready var hurtbox: Area2D = $hurtbox
 @onready var altar_area: Area2D = $altar_area
 @onready var altar_sprite: AnimatedSprite2D = %altar_sprite
+@onready var audio_powerup: AudioStreamPlayer = $audio_powerup
+@onready var audio_powerdown: AudioStreamPlayer = $audio_powerdown
 
 @export var hp: int = 100
 
@@ -27,12 +29,14 @@ func _on_player_delivered_kindling(area: Area2D) -> void:
 			return
 		player.has_kindling = false
 		SignalsBus.player_delivered_kindling_event.emit(0)
+		audio_powerup.play()
 		flame.play("pre-inferno")
 		await flame.animation_finished
 		flame.play("inferno")
 		SignalsBus.flame_inferno_event.emit()
 
 func _on_flame_inferno_ended(boss_killed: bool, _boss_rank: int) -> void:
+	audio_powerdown.play()
 	if boss_killed:
 		hp = clamp(hp - 25, 0, 100)
 		flame.play("post_inferno")

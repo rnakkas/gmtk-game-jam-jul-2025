@@ -1,12 +1,14 @@
-[gd_scene load_steps=25 format=4 uid="uid://ddrguy7u6bcjg"]
+[gd_scene load_steps=27 format=4 uid="uid://ddrguy7u6bcjg"]
 
 [ext_resource type="Script" uid="uid://ojyovbs4qei3" path="res://Main/Scripts/ui_layer.gd" id="1_jmiwd"]
 [ext_resource type="Script" uid="uid://uenksoles7gp" path="res://Main/Scripts/start_screen.gd" id="2_blkfr"]
 [ext_resource type="FontFile" uid="uid://cletjwknevx7o" path="res://Assets/MetalMania-Regular.ttf" id="2_gmq0f"]
 [ext_resource type="Script" uid="uid://vx6at1r5daio" path="res://Main/Scripts/main_menu.gd" id="3_fi20u"]
+[ext_resource type="AudioStream" uid="uid://kpbu2d3uxhjm" path="res://Assets/Audio/324199__brterry__d.mp3" id="4_exjj5"]
 [ext_resource type="Script" uid="uid://hof3ddvfcbao" path="res://Main/Scripts/how_to_play_screen.gd" id="4_li8qi"]
 [ext_resource type="Script" uid="uid://cl056ss53ctiu" path="res://Main/Scripts/hud.gd" id="5_7b1es"]
 [ext_resource type="Texture2D" uid="uid://dulvlmbao8l8g" path="res://Assets/kindling_icon.png" id="5_r87en"]
+[ext_resource type="AudioStream" uid="uid://hh3qaotv30rv" path="res://Assets/Audio/455202__lilmati__select-granted-02.wav" id="6_txtfy"]
 [ext_resource type="Script" uid="uid://6i46g1cyg8w6" path="res://Main/Scripts/dialog.gd" id="7_t1nn4"]
 [ext_resource type="Script" uid="uid://b0emommpc2ptf" path="res://Main/Scripts/pause_menu.gd" id="8_c5yft"]
 
@@ -1923,6 +1925,10 @@ vertical_alignment = 1
 
 [node name="blink_timer" type="Timer" parent="start_screen"]
 
+[node name="audio_start_screen" type="AudioStreamPlayer" parent="start_screen"]
+stream = ExtResource("4_exjj5")
+volume_db = -12.0
+
 [node name="main_menu" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
@@ -2044,6 +2050,14 @@ theme_override_fonts/font = ExtResource("2_gmq0f")
 theme_override_font_sizes/font_size = 20
 text = "Fullscreen"
 
+[node name="audio_main_menu_focus" type="AudioStreamPlayer" parent="main_menu"]
+stream = ExtResource("6_txtfy")
+volume_db = -15.0
+
+[node name="audio_main_menu_play" type="AudioStreamPlayer" parent="main_menu"]
+stream = ExtResource("4_exjj5")
+volume_db = -12.0
+
 [node name="how_to_play_screen" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
@@ -2112,6 +2126,14 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gmq0f")
 theme_override_font_sizes/font_size = 20
 text = "Back"
+
+[node name="audio_how_to_play_focus" type="AudioStreamPlayer" parent="how_to_play_screen"]
+stream = ExtResource("6_txtfy")
+volume_db = -15.0
+
+[node name="audio_how_to_play_back" type="AudioStreamPlayer" parent="how_to_play_screen"]
+stream = ExtResource("4_exjj5")
+volume_db = -12.0
 
 [node name="hud" type="Control" parent="."]
 unique_name_in_owner = true
@@ -2357,3 +2379,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gmq0f")
 theme_override_font_sizes/font_size = 20
 text = "Quit"
+
+[node name="audio_pause_menu_focus" type="AudioStreamPlayer" parent="pause_menu"]
+stream = ExtResource("6_txtfy")
+volume_db = -15.0
+
+[node name="audio_pause_menu_back_to_main" type="AudioStreamPlayer" parent="pause_menu"]
+stream = ExtResource("4_exjj5")
+volume_db = -12.0

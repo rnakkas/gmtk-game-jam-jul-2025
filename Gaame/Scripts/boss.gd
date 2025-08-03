@@ -9,6 +9,10 @@ class_name EnemyBoss
 @onready var shoot_timer_2: Timer = $shoot_timer_2
 @onready var boss_shooting: BossShooting = $boss_shooting
 @onready var boss_shooting_2: BossShooting = $boss_shooting2
+@onready var audio_spawn: AudioStreamPlayer = $audio_spawn
+@onready var audio_death_1: AudioStreamPlayer = $audio_death_1
+@onready var audio_death_2: AudioStreamPlayer = $audio_death_2
+
 
 @export var speed: float =  70.0
 @export var max_hp: int = 1
@@ -23,6 +27,7 @@ var stay_on_screen: bool
 var can_die: bool = true
 
 func _ready() -> void:
+	audio_spawn.play()
 	match rank:
 		1:
 			hp = max_hp
@@ -105,6 +110,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_player_death(_pos: Vector2) -> void:
+	audio_spawn.play()
 	chase_timer.stop()
 	stay_on_screen = false
 	velocity = velocity * 2
@@ -130,10 +136,12 @@ func _on_hit_by_attack(_area : Area2D) -> void:
 			hurtbox.set_deferred("monitorable", false)
 			hurtbox.set_deferred("monitoring", false)
 			if SignalsBus.flame.hp > 25:
+				audio_death_1.play()
 				sprite.play("despawn")
 				await sprite.animation_finished
 				call_deferred("queue_free")
 			else:
+				audio_death_2.play()
 				sprite.play("death")
 				await sprite.animation_finished
 				call_deferred("queue_free")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://rhtexhsqgpmg"]
+[gd_scene load_steps=50 format=3 uid="uid://rhtexhsqgpmg"]
 
 [ext_resource type="Script" uid="uid://03dsdnyqo3we" path="res://Gaame/Scripts/player.gd" id="1_mlcnc"]
 [ext_resource type="Texture2D" uid="uid://byicnnn52u00d" path="res://Assets/player-spritesheet-v2.png" id="1_teism"]
 [ext_resource type="Script" uid="uid://6mjr562nqpa7" path="res://Gaame/Scripts/shooting_handler.gd" id="3_aonr0"]
+[ext_resource type="AudioStream" uid="uid://dwsltj5e76032" path="res://Assets/Audio/442872__qubodup__fire-magic.wav" id="4_wo33g"]
+[ext_resource type="AudioStream" uid="uid://3r68gxfcq3bq" path="res://Assets/Audio/817288__nightdrawr__short-death-sound.mp3" id="5_262uf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_teism"]
 atlas = ExtResource("1_teism")
@@ -371,3 +373,13 @@ collision_mask = 32
 [node name="collider" type="CollisionShape2D" parent="kindling_area"]
 shape = SubResource("CircleShape2D_aonr0")
 debug_color = Color(0.5481, 0.563196, 0.102433, 0.42)
+
+[node name="audio_shoot" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_wo33g")
+volume_db = -12.5
+pitch_scale = 1.73
+
+[node name="audio_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_262uf")
+volume_db = -10.0

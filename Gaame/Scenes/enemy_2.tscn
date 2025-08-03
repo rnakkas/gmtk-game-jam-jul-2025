@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://2phb771wkseg"]
+[gd_scene load_steps=32 format=3 uid="uid://2phb771wkseg"]
 
 [ext_resource type="Texture2D" uid="uid://nk6kir5g3eyx" path="res://Assets/enemy-2_run.png" id="1_48x4u"]
 [ext_resource type="Texture2D" uid="uid://dq3e28fltfirv" path="res://Assets/enemy-2_death.png" id="1_66cxb"]
 [ext_resource type="Script" uid="uid://dnmi64fichqch" path="res://Gaame/Scripts/enemy_2.gd" id="1_sfhqb"]
 [ext_resource type="Texture2D" uid="uid://gjcgq84v3gaq" path="res://Assets/enemy_2_spawn.png" id="2_66cxb"]
+[ext_resource type="AudioStream" uid="uid://51fdmgetl8u1" path="res://Assets/Audio/407474__loyalty_freak_music__enemy-death.mp3" id="5_q8gag"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_66cxb"]
 radius = 22.2036
@@ -234,3 +235,8 @@ debug_color = Color(0.133201, 0.641911, 0.224931, 0.42)
 [node name="chase_timer" type="Timer" parent="."]
 
 [node name="screen_timer" type="Timer" parent="."]
+
+[node name="audio_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_q8gag")
+volume_db = -10.0
+pitch_scale = 2.5

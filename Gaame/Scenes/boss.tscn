@@ -1,8 +1,10 @@
-[gd_scene load_steps=70 format=3 uid="uid://bnju1hnbxire5"]
+[gd_scene load_steps=72 format=3 uid="uid://bnju1hnbxire5"]
 
 [ext_resource type="Texture2D" uid="uid://b2i47rg6lu6uf" path="res://Assets/boss.png" id="1_l88j3"]
 [ext_resource type="Script" uid="uid://gd2rua2et8p3" path="res://Gaame/Scripts/boss.gd" id="1_wivxt"]
 [ext_resource type="PackedScene" uid="uid://c1euadxyuyd1g" path="res://Gaame/Scenes/boss_shooting.tscn" id="3_3qocx"]
+[ext_resource type="AudioStream" uid="uid://diglwow8mocly" path="res://Assets/Audio/350679__drfx__deep-evil-laugh.mp3" id="4_nq46a"]
+[ext_resource type="AudioStream" uid="uid://c7sw1g6iu6pup" path="res://Assets/Audio/185366__anwul__monster.wav" id="5_f6q34"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wivxt"]
 atlas = ExtResource("1_l88j3")
@@ -523,7 +525,6 @@ shoot_timer = NodePath("../shoot_timer")
 
 [node name="boss_shooting2" parent="." node_paths=PackedStringArray("shoot_timer") instance=ExtResource("3_3qocx")]
 position = Vector2(0, -4.11765)
-scale = Vector2(1, 1)
 shoot_timer = NodePath("../shoot_timer_2")
 bullets_per_shot = 5
 bullet_speed = 120.0
@@ -531,3 +532,17 @@ shot_spread_angle = 360.0
 shooting_type = 0
 
 [node name="shoot_timer_2" type="Timer" parent="."]
+
+[node name="audio_spawn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nq46a")
+volume_db = -10.0
+
+[node name="audio_death_1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f6q34")
+volume_db = -12.0
+pitch_scale = 1.68
+
+[node name="audio_death_2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_f6q34")
+volume_db = -12.0
+pitch_scale = 0.86

@@ -5,6 +5,8 @@ class_name MainMenu
 @onready var play_button: Button = %play_button
 @onready var quit_button: Button = %quit_button
 @onready var fullscreen_check: Button = %fullscreen_check
+@onready var audio_focus: AudioStreamPlayer = $audio_main_menu_focus
+@onready var audio_play: AudioStreamPlayer = $audio_main_menu_play
 
 signal how_to_play_button_pressed()
 signal play_button_pressed()
@@ -30,6 +32,7 @@ func _ready() -> void:
 func _connect_to_signals() -> void:
 	for button: Button in buttons_array:
 		button.pressed.connect(self._on_menu_button_pressed)
+		button.mouse_entered.connect(self._on_menu_button_hovered)
 	visibility_changed.connect(self._on_visibility_changed)
 	fullscreen_check.toggled.connect(self._on_fullscreen_check_toggled)
 
@@ -44,9 +47,14 @@ func _on_menu_button_pressed() -> void:
 		how_to_play_button:
 			how_to_play_button_pressed.emit()
 		play_button:
+			# audio_play.play()
 			play_button_pressed.emit()
 		quit_button:
 			quit_button_pressed.emit()
+		
+
+func _on_menu_button_hovered() -> void:
+	audio_focus.play()
 
 func _on_visibility_changed() -> void:
 	if !visible:

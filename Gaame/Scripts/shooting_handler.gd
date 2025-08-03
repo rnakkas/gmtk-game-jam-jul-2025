@@ -7,6 +7,8 @@ class_name ShootingHandler
 ## Muzzles
 @onready var muzzle: Marker2D = $muzzle
 
+@onready var audio_shoot: AudioStreamPlayer = %audio_shoot
+
 ## Base bullet damage
 @export var base_fireball_damage: int = 1
 
@@ -71,6 +73,8 @@ func _handle_shooting() -> void:
 	if Input.is_action_pressed("shoot"):
 		if !on_shooting_cooldown:
 			on_shooting_cooldown = true
+
+			audio_shoot.play()
 
 			var fireball: PlayerFireball = Main.player_fireball_PS.instantiate()
 			fireball.position = location_base

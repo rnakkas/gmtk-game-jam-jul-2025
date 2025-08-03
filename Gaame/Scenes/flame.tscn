@@ -1,10 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://dcjxiydeuib6o"]
+[gd_scene load_steps=45 format=3 uid="uid://dcjxiydeuib6o"]
 
 [ext_resource type="Texture2D" uid="uid://biv7yee8bvjsp" path="res://Assets/flame_idle_feed-v1.png" id="1_l5n8w"]
 [ext_resource type="Script" uid="uid://c4ghd0xf3viuf" path="res://Gaame/Scripts/flame.gd" id="1_n6eva"]
 [ext_resource type="Texture2D" uid="uid://cibeo1ecru2cn" path="res://Assets/flame_feed_v2.png" id="2_sv7j3"]
 [ext_resource type="Texture2D" uid="uid://coxwafp1jm3ip" path="res://Assets/flame_explode-v2.png" id="3_emv1m"]
 [ext_resource type="Texture2D" uid="uid://c0qg8mfnvkhii" path="res://Assets/altar.png" id="3_xn0g5"]
+[ext_resource type="AudioStream" uid="uid://umlftq28vlh6" path="res://Assets/Audio/563540__colorscrimsontears__fire-2-rpg.wav" id="6_jryq8"]
+[ext_resource type="AudioStream" uid="uid://ds7iycfvkmp7k" path="res://Assets/Audio/563540__colorscrimsontears__fire-2-rpg_rev.wav" id="7_o64b8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6eva"]
 atlas = ExtResource("1_l5n8w")
@@ -388,3 +390,13 @@ frame_progress = 1.0
 position = Vector2(0, 86.5)
 shape = SubResource("RectangleShape2D_emv1m")
 debug_color = Color(0.485144, 0.580216, 0.237289, 0.42)
+
+[node name="audio_powerup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_jryq8")
+volume_db = -9.0
+pitch_scale = 0.89
+
+[node name="audio_powerdown" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_o64b8")
+volume_db = -7.0
+pitch_scale = 0.89

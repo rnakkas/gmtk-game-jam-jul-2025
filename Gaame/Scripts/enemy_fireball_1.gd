@@ -3,6 +3,8 @@ class_name EnemyFireballOne
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var screen_notifier: VisibleOnScreenNotifier2D = $screen_notifier
+@onready var audio_hit: AudioStreamPlayer = $audio_hit
+
 
 @export var speed: float = 120.0
 
@@ -27,6 +29,7 @@ func _on_screen_exited() -> void:
 	call_deferred("queue_free")
 
 func _on_target_hit(_area: Area2D) -> void:
+	audio_hit.play()
 	velocity = Vector2.ZERO
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgckavvlujm41"]
+[gd_scene load_steps=10 format=3 uid="uid://dgckavvlujm41"]
 
 [ext_resource type="Script" uid="uid://c2tmsquvtefai" path="res://Gaame/Scripts/kindling.gd" id="1_qvk0y"]
 [ext_resource type="Texture2D" uid="uid://dn5egxiwi2vnd" path="res://Assets/kindling-v1.png" id="2_4ouhr"]
+[ext_resource type="AudioStream" uid="uid://hh3qaotv30rv" path="res://Assets/Audio/455202__lilmati__select-granted-02.wav" id="3_8xoet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8xoet"]
 atlas = ExtResource("2_4ouhr")
@@ -87,3 +88,8 @@ visible = false
 shape = SubResource("CircleShape2D_4ouhr")
 
 [node name="despawn_timer" type="Timer" parent="."]
+
+[node name="audio_pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8xoet")
+volume_db = -12.0
+pitch_scale = 0.19

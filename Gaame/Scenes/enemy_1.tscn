@@ -1,10 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://chheulqygrjij"]
+[gd_scene load_steps=37 format=3 uid="uid://chheulqygrjij"]
 
 [ext_resource type="Texture2D" uid="uid://bgxcmvbpc3djn" path="res://Assets/enemy-1_idle_attack.png" id="1_0pfq6"]
 [ext_resource type="Script" uid="uid://cmle87gfgfusi" path="res://Gaame/Scripts/enemy_1.gd" id="1_7jgh4"]
 [ext_resource type="Texture2D" uid="uid://dbus4jo4oykld" path="res://Assets/enemy_1_spawn.png" id="1_k2224"]
 [ext_resource type="Texture2D" uid="uid://ci4j6hy8ksf14" path="res://Assets/enemy-1_death.png" id="3_orsle"]
 [ext_resource type="Script" uid="uid://c8v5jk3fuyk1p" path="res://Gaame/Scripts/enemy_shooting_component.gd" id="4_xarwp"]
+[ext_resource type="AudioStream" uid="uid://51fdmgetl8u1" path="res://Assets/Audio/407474__loyalty_freak_music__enemy-death.mp3" id="6_mgmnj"]
+[ext_resource type="AudioStream" uid="uid://dwsltj5e76032" path="res://Assets/Audio/442872__qubodup__fire-magic.wav" id="7_rj8jq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0pfq6"]
 radius = 17.0
@@ -253,3 +255,13 @@ script = ExtResource("4_xarwp")
 [node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(2, -2)
 gizmo_extents = 640.6
+
+[node name="audio_death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_mgmnj")
+volume_db = -10.0
+pitch_scale = 2.01
+
+[node name="audio_shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rj8jq")
+volume_db = -22.0
+pitch_scale = 0.7

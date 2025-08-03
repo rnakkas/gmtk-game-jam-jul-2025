@@ -16,6 +16,8 @@ class_name Player
 
 @onready var kindling_area: Area2D = $kindling_area
 
+@onready var audio_death: AudioStreamPlayer = $audio_death
+
 ## Velocity
 @export var _max_speed: float = 150.0
 @export var acceleration: float = 900.0
@@ -167,6 +169,8 @@ func _unhandled_input(event: InputEvent) -> void:
 # # Handle getting hit by enemies or projectiles
 # ################################################
 func _on_hit_by_enemy_or_attacks(_area: Area2D) -> void:
+	audio_death.play()
+
 	SignalsBus.player_hit_event.emit()
 	
 	is_dead = true

@@ -3,6 +3,8 @@ class_name BossFireball
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var screen_notifier: VisibleOnScreenNotifier2D = $screen_notifier
+@onready var audio_shoot: AudioStreamPlayer = $audio_shoot
+@onready var audio_hit: AudioStreamPlayer = $audio_hit
 
 @export var speed: float = 120.0 # Change per enenmy
 
@@ -11,6 +13,7 @@ var angle_deg: float = 180.0 # Default angle, points to the left
 
 
 func _ready() -> void:
+	audio_shoot.play()
 	_connect_to_own_signals()
 	direction = - direction.rotated(deg_to_rad(angle_deg)) # Since its facing the left
 	self.rotate(deg_to_rad(angle_deg))
@@ -33,6 +36,7 @@ func _on_screen_notifier_screen_exited() -> void:
 
 
 func _on_area_entered(_area: Area2D) -> void:
+	audio_hit.play()
 	speed = 0
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)

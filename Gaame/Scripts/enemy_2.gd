@@ -7,6 +7,7 @@ class_name EnemyTwo
 @onready var fire_detect_area: Area2D = $fire_detect_area
 @onready var chase_timer: Timer = $chase_timer
 @onready var screen_timer: Timer = $screen_timer
+@onready var audio_death: AudioStreamPlayer = $audio_death
 
 @export var speed: float = 80.0
 @export var screen_time: float = 5.0
@@ -69,6 +70,7 @@ func _get_player_position() -> void:
 
 
 func _on_hit(_area: Area2D) -> void:
+	audio_death.play()
 	chase_timer.stop()
 	velocity = Vector2.ZERO
 	hurtbox.set_deferred("monitorable", false)
@@ -90,6 +92,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_flame_died() -> void:
+	audio_death.play()
 	hurtbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
 	sprite.play("death")

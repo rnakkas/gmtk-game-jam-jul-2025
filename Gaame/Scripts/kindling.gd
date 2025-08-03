@@ -3,11 +3,13 @@ class_name Kindling
 
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var despawn_timer: Timer = $despawn_timer
+@onready var audio_pickup: AudioStreamPlayer = $audio_pickup
 
 @export var despawn_time: float = 5.0
 
 
 func _ready() -> void:
+	SignalsBus.player_death_event.connect(self._on_player_death)
 	area_entered.connect(self._on_player_picked_up_kindling)
 
 	despawn_timer.timeout.connect(self._on_despawn_timer_timeout)
@@ -16,6 +18,8 @@ func _ready() -> void:
 	despawn_timer.start()
 
 func _on_player_picked_up_kindling(_area: Area2D) -> void:
+	audio_pickup.play()
+
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)
 
@@ -33,6 +37,9 @@ func _on_player_picked_up_kindling(_area: Area2D) -> void:
 	await tween.finished
 	SignalsBus.kindling_picked_up_event.emit()
 	call_deferred("queue_free")
+
+func _on_player_death(_pos: Vector2)-> void:
+	_despawn()
 
 func _on_despawn_timer_timeout() -> void:
 	_despawn()

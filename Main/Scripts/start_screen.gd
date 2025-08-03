@@ -3,6 +3,7 @@ class_name StartScreen
 
 @onready var press_button_label: Label = %press_button_label
 @onready var blink_timer: Timer = $blink_timer
+@onready var audio: AudioStreamPlayer = $audio_start_screen
 
 signal start_screen_button_pressed()
 
@@ -28,6 +29,7 @@ func _input(event: InputEvent) -> void:
 		return
 	# Check any keyboard key or mouse button pressed
 	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed):
+		audio.play()
 		blink_timer.wait_time = blink_time_pressed
 		await get_tree().create_timer(0.75).timeout
 		blink_timer.stop()

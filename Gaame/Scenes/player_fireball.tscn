@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cxp28es7m0v55"]
+[gd_scene load_steps=21 format=3 uid="uid://cxp28es7m0v55"]
 
 [ext_resource type="Script" uid="uid://icwfuq7807sl" path="res://Gaame/Scripts/player_fireball.gd" id="1_nii0j"]
 [ext_resource type="Texture2D" uid="uid://byicnnn52u00d" path="res://Assets/player-spritesheet-v2.png" id="2_xaxgy"]
+[ext_resource type="AudioStream" uid="uid://dwsltj5e76032" path="res://Assets/Audio/442872__qubodup__fire-magic.wav" id="3_aajon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aajon"]
 atlas = ExtResource("2_xaxgy")
@@ -142,3 +143,8 @@ shape = SubResource("CircleShape2D_xaxgy")
 [node name="lifetime_timer" type="Timer" parent="."]
 
 [node name="friendly_fire_timer" type="Timer" parent="."]
+
+[node name="audio_hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_aajon")
+volume_db = -12.0
+pitch_scale = 3.95

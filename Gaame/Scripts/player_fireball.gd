@@ -4,6 +4,7 @@ class_name PlayerFireball
 @onready var lifetime_timer: Timer = $lifetime_timer
 @onready var friendly_fire_timer: Timer = $friendly_fire_timer
 @onready var sprite: AnimatedSprite2D = $sprite
+@onready var audio_hit: AudioStreamPlayer = $audio_hit
 
 @export var damage: int = 1
 @export var speed: float = 320.0
@@ -41,6 +42,7 @@ func _on_lifetime_timer_timeout() -> void:
 	call_deferred("queue_free")
 
 func _on_area_hit(_area: Area2D) -> void:
+	audio_hit.play()
 	velocity = Vector2.ZERO
 	sprite.play("hit")
 	await sprite.animation_finished
@@ -49,6 +51,7 @@ func _on_area_hit(_area: Area2D) -> void:
 # When it hits flame
 func _on_body_hit(body: Node2D) -> void:
 	if body is StaticBody2D:
+		audio_hit.play()
 		velocity = Vector2.ZERO
 		sprite.play("hit")
 		await sprite.animation_finished

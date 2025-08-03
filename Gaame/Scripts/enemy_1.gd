@@ -5,6 +5,8 @@ class_name EnemyOne
 @onready var shoot_timer: Timer = $shoot_timer
 @onready var muzzle: Marker2D = $muzzle
 @onready var hurtbox: Area2D = $hurtbox
+@onready var audio_death: AudioStreamPlayer = $audio_death
+@onready var audio_shoot: AudioStreamPlayer = $audio_shoot
 
 @export var max_shoot_time: float = 2.2
 @export var min_shoot_time: float = 1.4
@@ -41,6 +43,7 @@ func _on_shoot_timer_timeout() -> void:
 		fireball.global_position = muzzle.global_position
 		fireball.direction = direction
 		SignalsBus.enemy_shooting_event.emit(fireball)
+		audio_shoot.play()
 
 		shoot_time = randf_range(min_shoot_time, max_shoot_time)
 
@@ -52,6 +55,7 @@ func _on_shoot_timer_timeout() -> void:
 
 	
 func _on_hit_by_player_or_attack(_area: Area2D) -> void:
+	audio_death.play()
 	shoot_timer.stop()
 	hurtbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
@@ -61,6 +65,7 @@ func _on_hit_by_player_or_attack(_area: Area2D) -> void:
 	call_deferred("queue_free")
 
 func _on_flame_died() -> void:
+	audio_death.play()
 	shoot_timer.stop()
 	hurtbox.set_deferred("monitorable", false)
 	hurtbox.set_deferred("monitoring", false)
