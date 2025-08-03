@@ -15,7 +15,7 @@ class_name EnemyBoss
 
 
 @export var speed: float =  70.0
-@export var max_hp: int = 1
+@export var max_hp: int = 40
 @export var rank: int = 1
 
 var hp: int
