@@ -36,7 +36,7 @@ func _ready() -> void:
 			boss_shooting.shot_spread_angle = 25.0
 		
 		2:
-			# hp = max_hp + 10
+			hp = max_hp + 10
 			boss_shooting.shoot_time = 1.75
 			boss_shooting.bullets_per_shot = 5
 			boss_shooting.shot_spread_angle = 30.0
@@ -44,7 +44,7 @@ func _ready() -> void:
 			shoot_timer_2.start()
 		
 		3:
-			# hp = max_hp + 20
+			hp = max_hp + 20
 			boss_shooting.shoot_time = 1.5
 			boss_shooting.bullets_per_shot = 7
 			boss_shooting.shot_spread_angle = 35.0
@@ -52,7 +52,7 @@ func _ready() -> void:
 			shoot_timer_2.start()
 		
 		4:
-			# hp = max_hp + 30
+			hp = max_hp + 30
 			boss_shooting.shoot_time = 1.3
 			boss_shooting.bullets_per_shot = 9
 			boss_shooting.shot_spread_angle = 40
